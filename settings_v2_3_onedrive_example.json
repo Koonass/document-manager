@@ -1,0 +1,46 @@
+{
+  "_comment": "OneDrive deployment configuration - uses relative paths",
+  "_instructions": [
+    "This configuration uses relative paths that work from any user's OneDrive",
+    "1. Copy this file and rename to settings_v2_3.json",
+    "2. Create the DATA folder structure in the same directory as the application",
+    "3. All paths are relative to the application folder",
+    "4. Works automatically regardless of OneDrive username or sync location"
+  ],
+  "html_path": "DATA\\BisTrack Exports",
+  "pdf_path": "DATA\\PDFs",
+  "archive_path": "DATA\\Archive",
+  "db_path": "DATA\\document_manager_v2.1.db",
+  "printer1_name": "",
+  "printer1_color_mode": "Color",
+  "printer1_copies": 1,
+  "printer1_enabled": true,
+  "printer2_name": "",
+  "printer2_color_mode": "Color",
+  "printer2_copies": 1,
+  "printer2_enabled": true,
+  "folder_printer_name": "",
+  "folder_printer_enabled": true,
+  "version": "2.3.0",
+  "_folder_structure": [
+    "Create this structure in your OneDrive DocumentManager folder:",
+    "DocumentManager/",
+    "├── DATA/",
+    "│   ├── document_manager_v2.1.db (auto-created)",
+    "│   ├── BisTrack Exports/ (create this)",
+    "│   ├── PDFs/ (create this)",
+    "│   └── Archive/ (create this)",
+    "├── src/",
+    "├── LABEL TEMPLATE/",
+    "├── START_APP.bat",
+    "├── run_v2_3.py",
+    "└── settings_v2_3.json"
+  ],
+  "_notes": [
+    "Database supports 2-3 concurrent users on OneDrive",
+    "SQLite with WAL mode enabled for better concurrent access",
+    "OneDrive handles file sync automatically",
+    "Close application when not in use to reduce sync conflicts",
+    "All users must point to the same OneDrive folder"
+  ]
+}

@@ -1,0 +1,270 @@
+================================================================================
+TROUBLESHOOTING: Nothing Printed
+================================================================================
+
+SYMPTOM: Software says "Successfully printed" but nothing comes out of printer
+
+PRINTER: \\vcoloprint\FB-Labels
+
+================================================================================
+QUICK CHECKS
+================================================================================
+
+CHECK 1: Is the printer online and has paper?
+----------------------------------------------
+☐ Printer is turned on
+☐ Printer has paper/labels loaded
+☐ No paper jam
+☐ No error lights on printer
+☐ Printer shows "Ready" status
+
+
+CHECK 2: Can you reach the network printer?
+--------------------------------------------
+Open Command Prompt:
+
+ping vcoloprint
+
+Expected: Should get replies
+If timeout: Network issue - can't reach print server
+
+
+CHECK 3: Is the printer installed on this computer?
+----------------------------------------------------
+1. Open Control Panel → Devices and Printers
+2. Look for: \\vcoloprint\FB-Labels
+3. Right-click → Printer Properties
+
+☐ Printer shows up in list
+☐ Status is "Ready" (not "Offline" or "Error")
+☐ Can see printer properties
+
+
+CHECK 4: Test print from Windows
+---------------------------------
+1. Control Panel → Devices and Printers
+2. Right-click \\vcoloprint\FB-Labels
+3. Click "Print Test Page"
+
+Did it print?
+  ✓ YES → Printer works, issue is with Word/application
+  ✗ NO  → Printer configuration problem
+
+
+CHECK 5: Check print queue
+---------------------------
+1. Control Panel → Devices and Printers
+2. Double-click \\vcoloprint\FB-Labels
+3. Opens print queue window
+
+Are there stuck jobs?
+  ✓ YES → Clear them (see below)
+  ✗ NO  → Jobs aren't reaching the queue
+
+
+================================================================================
+SOLUTIONS
+================================================================================
+
+SOLUTION 1: Clear stuck print jobs
+-----------------------------------
+Run as Administrator:
+  CLEAR_PRINT_QUEUE.bat
+
+Or manually:
+  1. Services → Print Spooler → Stop
+  2. Delete: C:\Windows\System32\spool\PRINTERS\*.*
+  3. Services → Print Spooler → Start
+
+
+SOLUTION 2: Reconnect network printer
+--------------------------------------
+1. Control Panel → Devices and Printers
+2. Right-click \\vcoloprint\FB-Labels → Remove device
+3. Add a printer → Select network printer
+4. Browse to: \\vcoloprint\FB-Labels
+5. Install
+
+
+SOLUTION 3: Check printer name spelling
+----------------------------------------
+Run: LIST_ALL_PRINTERS.bat
+
+Compare exact printer name with what's configured.
+Printer names must match EXACTLY (case-sensitive, slashes, etc.)
+
+In logs, we see:
+  \\vcoloprint\FB-Labels
+
+Make sure this EXACT name is in your printer list.
+
+
+SOLUTION 4: Set as default printer
+-----------------------------------
+1. Control Panel → Devices and Printers
+2. Right-click \\vcoloprint\FB-Labels
+3. Set as default printer
+4. Try printing again
+
+
+SOLUTION 5: Check printer permissions
+--------------------------------------
+1. Right-click printer → Printer Properties
+2. Security tab
+3. Make sure your user has "Print" permission
+
+If you don't have permission:
+  - Ask IT to grant permission
+  - Or use a different printer
+
+
+SOLUTION 6: Test with a simple Word document
+---------------------------------------------
+1. Open Word
+2. Create simple document with one word: "TEST"
+3. File → Print
+4. Select \\vcoloprint\FB-Labels
+5. Click Print
+
+Did it print?
+  ✓ YES → Word printing works, issue is with template/bookmarks
+  ✗ NO  → Word can't print to this printer
+
+
+SOLUTION 7: Update printer driver
+----------------------------------
+1. Right-click printer → Printer Properties
+2. Advanced tab
+3. Click "New Driver"
+4. Install updated driver
+
+
+================================================================================
+COMMON ISSUES
+================================================================================
+
+Issue: "Access Denied" when printing
+-------------------------------------
+Cause: No permission to use network printer
+Fix: Ask IT to grant permission or use different printer
+
+
+Issue: Jobs appear in queue but don't print
+--------------------------------------------
+Cause: Printer is paused or offline
+Fix:
+  1. Open print queue
+  2. Printer menu → Use Printer Online
+  3. Printer menu → Resume Printing
+
+
+Issue: Labels print blank
+--------------------------
+Cause: Missing bookmarks in template
+Fix: Add bookmarks to template (see earlier instructions)
+
+
+Issue: Printer not found
+------------------------
+Cause: Print server name wrong or server down
+Fix:
+  1. Ping vcoloprint
+  2. Check with IT if print server is up
+  3. Verify printer name spelling
+
+
+Issue: Print jobs disappear from queue immediately
+---------------------------------------------------
+Cause: Print spooler crashes or rejects jobs
+Fix:
+  1. Check Windows Event Viewer for spooler errors
+  2. Restart print spooler service
+  3. Check disk space (spooler needs temp space)
+
+
+================================================================================
+TESTING STEPS
+================================================================================
+
+Step 1: Run printer diagnostic
+-------------------------------
+TEST_PRINTER.bat
+
+This will:
+- Ping print server
+- List all printers
+- Show print queue
+- Attempt test print
+
+
+Step 2: Check printer in application
+-------------------------------------
+1. Open Document Manager
+2. Print Settings
+3. Dropdown should show: \\vcoloprint\FB-Labels
+4. If not shown → printer not installed
+
+
+Step 3: Watch print queue while printing
+-----------------------------------------
+1. Open print queue window
+2. Keep it visible
+3. Print a label from application
+4. Watch if job appears in queue
+
+If job appears then disappears:
+  → Print server received it, printer should print
+
+If job never appears:
+  → Job not reaching printer (driver/permission issue)
+
+
+================================================================================
+LOG FILE CLUES
+================================================================================
+
+From your log:
+
+✓ Template opened successfully
+✓ Bookmarks filled (some missing, but process continued)
+✓ Document sent to printer
+✓ PrintOut command completed
+✓ "Successfully printed folder label"
+
+This means:
+- Word opened the template ✓
+- Word sent print command ✓
+- No errors reported ✓
+- BUT physical printer didn't receive or print
+
+Likely causes:
+1. Print job stuck in queue
+2. Printer offline/not ready
+3. Network printer not accessible
+4. Print job sent to wrong printer
+5. Permissions issue
+
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Run: TEST_PRINTER.bat
+   Check if test page prints
+
+2. Check printer status in Control Panel
+   Is it online and ready?
+
+3. Try printing test page from Windows
+   Right-click printer → Print Test Page
+
+4. If nothing works:
+   - Check with IT about printer access
+   - Verify print server is running
+   - Try different printer
+
+5. If test page prints but labels don't:
+   - Issue is with Word/template
+   - Try printing simple Word doc to that printer
+
+================================================================================

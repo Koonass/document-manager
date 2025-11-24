@@ -1,0 +1,110 @@
+================================================================================
+  MANUAL RUN INSTRUCTIONS - For Work Machine Without Python in PATH
+================================================================================
+
+If the .bat file doesn't work, use one of these methods:
+
+================================================================================
+METHOD 1: Find Your Python Installation
+================================================================================
+
+1. Open File Explorer
+2. Search for "python.exe" on your C: drive
+3. Note the full path (example: C:\Python311\python.exe)
+4. Open Command Prompt in this folder (Shift + Right-click > "Open in Terminal")
+5. Run:
+   C:\Python311\python.exe "C:\full\path\to\Document Manager\printer_diagnostics.py"
+
+Replace paths with your actual locations.
+
+================================================================================
+METHOD 2: Create Custom Batch File
+================================================================================
+
+1. Create a new file: "my_printer_setup.bat"
+2. Edit it with this content (replace paths with yours):
+
+@echo off
+"C:\Python311\python.exe" "C:\code\Document Manager\printer_diagnostics.py"
+pause
+
+3. Save and double-click to run
+
+================================================================================
+METHOD 3: Use File Association
+================================================================================
+
+If .py files are associated with Python:
+
+1. Navigate to: C:\code\Document Manager
+2. Double-click: printer_diagnostics.py
+3. Should open automatically with Python
+
+If it doesn't work, right-click > "Open with" > Browse for python.exe
+
+================================================================================
+METHOD 4: PowerShell Alternative
+================================================================================
+
+1. Open PowerShell
+2. Navigate to folder:
+   cd "C:\code\Document Manager"
+
+3. Run:
+   & "C:\Python311\python.exe" .\printer_diagnostics.py
+
+(Replace C:\Python311\python.exe with your Python path)
+
+================================================================================
+METHOD 5: Create Desktop Shortcut
+================================================================================
+
+1. Right-click on Desktop > New > Shortcut
+2. Target:
+   "C:\Python311\python.exe" "C:\code\Document Manager\printer_diagnostics.py"
+3. Name it: "Printer Setup"
+4. Click Finish
+5. Double-click shortcut to run
+
+================================================================================
+FINDING YOUR PYTHON INSTALLATION
+================================================================================
+
+Try these locations:
+
+• C:\Python312\python.exe
+• C:\Python311\python.exe
+• C:\Python310\python.exe
+• C:\Python39\python.exe
+• C:\Users\[YourUsername]\AppData\Local\Programs\Python\Python311\python.exe
+• C:\Program Files\Python311\python.exe
+
+Or in Command Prompt, type:
+   where python
+   py --version
+
+================================================================================
+IF PYTHON IS NOT INSTALLED
+================================================================================
+
+Download from: https://www.python.org/downloads/
+
+During installation:
+☑ Check "Add Python to PATH"
+☑ Check "Install pip"
+
+Then install dependencies:
+   python -m pip install -r requirements.txt
+
+================================================================================
+AFTER GETTING IT RUNNING
+================================================================================
+
+Once printer_diagnostics.py opens:
+1. Click "Run Setup Wizard"
+2. Follow 7-step process
+3. Select your large format plotter in step 4!
+4. Test all printers
+5. Start printing
+
+================================================================================

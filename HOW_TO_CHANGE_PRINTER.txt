@@ -1,0 +1,164 @@
+================================================================================
+HOW TO CHANGE THE PRINTER IN THE APPLICATION
+================================================================================
+
+ISSUE: App is configured to print to wrong printer
+
+CURRENT (from logs):
+  \\vcoloprint\FB-Labels  ← This printer doesn't work
+
+CORRECT PRINTER (from your test):
+  TSC TTP-245C  ← This printer works!
+
+================================================================================
+SOLUTION: Configure Correct Printer in Application
+================================================================================
+
+Method 1: In the Application (RECOMMENDED)
+-------------------------------------------
+
+1. Launch the application:
+   START_APP.bat
+
+2. Open an order (click any day in calendar)
+
+3. Scroll down to "Print Settings" section
+
+4. Find "Folder Printer" section
+
+5. Click the dropdown that shows printer names
+
+6. Select: TSC TTP-245C
+
+7. The setting saves automatically
+
+8. Test print a label
+
+
+Method 2: Edit Print Preset JSON File
+--------------------------------------
+
+If using print presets:
+
+1. Close the application
+
+2. Open file: print_presets.json
+
+3. Find the section with:
+   "folder_label_printer": "\\\\vcoloprint\\FB-Labels"
+
+4. Change to:
+   "folder_label_printer": "TSC TTP-245C"
+
+5. Save file
+
+6. Restart application
+
+
+Method 3: Check Settings JSON
+------------------------------
+
+If not using presets:
+
+1. Close application
+
+2. Open: settings_v2_3.json
+
+3. Look for:
+   "folder_printer_name": "\\\\vcoloprint\\FB-Labels"
+
+4. Change to:
+   "folder_printer_name": "TSC TTP-245C"
+
+5. Save file
+
+6. Restart application
+
+
+================================================================================
+VERIFY PRINTER NAME
+================================================================================
+
+To see exact printer names available:
+
+Option A: Run diagnostic
+-------------------------
+LIST_ALL_PRINTERS.bat
+
+This shows all installed printers with exact names.
+
+
+Option B: Check in Windows
+---------------------------
+1. Control Panel → Devices and Printers
+2. Look at printer names
+3. Use EXACT name (case-sensitive)
+
+
+================================================================================
+COMMON PRINTER NAME FORMATS
+================================================================================
+
+Network printer format:
+  \\SERVER\PrinterName
+  Example: \\vcoloprint\FB-Labels
+
+Local printer format:
+  PrinterName
+  Example: TSC TTP-245C
+
+USB printer format:
+  USB001 PrinterName
+  Example: USB001 TSC TTP-245C
+
+
+Your printer appears to be LOCAL, so use:
+  TSC TTP-245C
+
+
+================================================================================
+AFTER CHANGING PRINTER
+================================================================================
+
+1. Restart application
+
+2. Test print:
+   - Select one order
+   - Enable "Folder Printer"
+   - Verify dropdown shows: TSC TTP-245C
+   - Click "Print All"
+
+3. Check if label prints
+
+4. Check log file:
+   Should see: "printer: TSC TTP-245C" (not vcoloprint)
+
+
+================================================================================
+IF PRINTER DROPDOWN IS EMPTY
+================================================================================
+
+Problem: Printer list not loading
+
+Solution:
+1. Make sure printer is installed in Windows
+2. Control Panel → Devices and Printers
+3. Add printer if missing
+4. Restart application
+5. Dropdown should populate with available printers
+
+
+================================================================================
+TESTING WITHOUT PRINTING
+================================================================================
+
+Use TEST_TEMPLATE.bat to:
+1. Fill template with test data
+2. Save as PDF (TEST_LABEL_OUTPUT.pdf)
+3. Verify bookmarks are filled correctly
+4. No actual printing (just creates PDF)
+
+This lets you verify template works before testing printer.
+
+
+================================================================================

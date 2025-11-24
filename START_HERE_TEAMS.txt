@@ -1,0 +1,89 @@
+============================================================
+  Document Manager - Teams Deployment Quick Start
+============================================================
+
+Perfect! Since you already use Microsoft Teams for shared files,
+this will be the EASIEST deployment method.
+
+============================================================
+QUICK 3-STEP DEPLOYMENT
+============================================================
+
+STEP 1: Find Your Teams Folder
+-------------------------------
+Open File Explorer and look for:
+  OneDrive - [YourCompany]\[TeamName - General]
+
+Example:
+  C:\Users\YourName\OneDrive - CompanyName\Engineering - General
+
+(Same folder where your shared spreadsheet is!)
+
+
+STEP 2: Deploy Application (5 minutes)
+---------------------------------------
+1. Open Command Prompt
+2. Run these commands:
+
+   cd C:\code\Document Manager
+   DEPLOY_TO_ONEDRIVE.bat
+
+3. When asked for path, enter your Teams folder:
+
+   C:\Users\YourName\OneDrive - CompanyName\[Team - Channel]\Apps\DocumentManager
+
+
+STEP 3: Notify Team (1 minute)
+-------------------------------
+Post this in your Teams channel:
+
+---
+Hi Team,
+
+Document Manager is now in our Files tab!
+
+Setup (3 min, one-time):
+1. Files tab → Apps → DocumentManager folder
+2. Double-click: SETUP_PYTHON_DEPS.bat
+3. Right-click START_APP.bat → Send to Desktop
+4. Rename shortcut to "Document Manager"
+
+Daily: Double-click desktop shortcut
+
+Everyone shares the same database!
+---
+
+============================================================
+WHY THIS WORKS PERFECTLY
+============================================================
+
+✅ Team members already have access (in the channel)
+✅ Files already synced (like your spreadsheet)
+✅ No manual sharing needed
+✅ No IT approval required
+✅ No .exe files (avoids Sentinel One)
+✅ Same workflow as spreadsheet
+✅ 2-3 concurrent users supported
+✅ Up to 20 total users supported
+
+============================================================
+DETAILED GUIDES
+============================================================
+
+Quick Start:
+  - TEAMS_DEPLOYMENT_GUIDE.md (RECOMMENDED!)
+
+Additional Info:
+  - ONEDRIVE_QUICK_START.md
+  - ONEDRIVE_DEPLOYMENT_GUIDE.md
+  - ONEDRIVE_LOCATION_GUIDE.md
+
+============================================================
+SUPPORT
+============================================================
+
+Problems? See TEAMS_DEPLOYMENT_GUIDE.md troubleshooting section
+
+Questions? Ask in your Teams channel!
+
+============================================================

@@ -1,0 +1,13 @@
+Reading template: C:\code\Document Manager\LABEL TEMPLATE\Contract_Lumber_Label_Template.docx
+================================================================================
+
+Found 5 bookmarks in template:
+
+  1. 'Customer'
+  2. 'Level'
+  3. 'LotSub'
+  4. 'OrderNum'
+  5. 'OrderNumber'
+
+================================================================================
+SUCCESS: Done!

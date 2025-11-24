@@ -1,0 +1,49 @@
+{
+  "_comment": "Template configuration for Document Manager v2.4 - uses relative paths for portability",
+  "_instructions": [
+    "SETUP INSTRUCTIONS:",
+    "1. Copy this file and rename to settings_v2_4.json",
+    "2. Create the DATA folder structure (see below)",
+    "3. Configure your printer names if using auto-print features",
+    "4. All paths are relative - works for any user automatically"
+  ],
+  "html_path": "DATA\\BisTrack Exports",
+  "pdf_path": "DATA\\PDFs",
+  "archive_path": "DATA\\Archive",
+  "db_path": "DATA\\document_manager_v2.1.db",
+  "products_file_path": "DATA\\products_master.csv",
+  "printer1_name": "",
+  "printer1_color_mode": "Color",
+  "printer1_copies": 1,
+  "printer1_enabled": true,
+  "printer2_name": "",
+  "printer2_color_mode": "Color",
+  "printer2_copies": 1,
+  "printer2_enabled": true,
+  "folder_printer_name": "",
+  "folder_printer_enabled": true,
+  "version": "2.4.0",
+  "_folder_structure": [
+    "Create this structure where you deploy the application:",
+    "DocumentManager/",
+    "├── DATA/",
+    "│   ├── document_manager_v2.1.db (auto-created)",
+    "│   ├── BisTrack Exports/ (place HTML files here)",
+    "│   ├── PDFs/ (generated PDFs saved here)",
+    "│   ├── Archive/ (archived records here)",
+    "│   └── products_master.csv (optional)",
+    "├── src/",
+    "├── LABEL TEMPLATE/",
+    "│   └── Contract_Lumber_Label_Template.docx",
+    "├── START_V2_4.bat",
+    "├── run_v2_4.py",
+    "└── settings_v2_4.json (copy from this template)"
+  ],
+  "_deployment_notes": [
+    "OneDrive: Works from any user's OneDrive automatically",
+    "Network Share: Use UNC paths like \\\\server\\share\\DocumentManager",
+    "Local: Copy entire folder to C:\\Apps\\DocumentManager or similar",
+    "Database: Supports 2-3 concurrent users with WAL mode",
+    "Close app when not in use to reduce sync conflicts"
+  ]
+}

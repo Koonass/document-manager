@@ -1,0 +1,419 @@
+================================================================================
+DOCUMENT MANAGER - INSTALLATION PACKAGE STRUCTURE
+================================================================================
+
+This document shows the exact folder and file structure recommended for 
+different installation methods.
+
+================================================================================
+OPTION 1: RECOMMENDED - PYTHON INSTALLATION (Clean, Simple)
+================================================================================
+
+DocumentManager_v2.3_Python/
+│
+├── README.md                                [2 KB, user guide]
+├── QUICK_START.txt                          [1 KB, quick reference]
+├── requirements.txt                         [80 bytes, pip dependencies]
+│
+├── run_v2_3.py                              [2 KB, main launcher]
+│
+├── settings_v2_3.json                       [170 bytes, default config]
+├── print_presets.json                       [970 bytes, printer presets]
+│
+├── LABEL TEMPLATE/
+│   └── Contract_Lumber_Label_Template.docx  [70 KB, CRITICAL]
+│
+└── src/                                     [30 Python modules, 500 KB]
+    ├── __init__.py
+    ├── main_v2_3.py
+    ├── pdf_processor.py
+    ├── enhanced_database_v2.py
+    ├── relationship_manager.py
+    ├── statistics_calendar_widget.py
+    ├── enhanced_expanded_view.py
+    ├── enhanced_search_view.py
+    ├── word_template_processor.py
+    ├── batch_print_with_presets.py
+    ├── archive_manager.py
+    ├── printer_setup_wizard.py
+    ├── network_printer_manager.py
+    ├── network_batch_print.py
+    ├── print_preset_manager.py
+    ├── print_preset_ui.py
+    ├── print_diagnostics.py
+    ├── advanced_print_manager.py
+    ├── error_logger.py
+    ├── log_viewer.py
+    ├── user_preferences.py
+    ├── verify_template.py
+    ├── database_manager.py                  [legacy support]
+    ├── enhanced_database_manager.py         [legacy support]
+    ├── calendar_widget.py                   [legacy support]
+    ├── two_week_calendar_widget.py          [legacy support]
+    ├── main_redesign.py                     [legacy support]
+    ├── main_v2_1.py                         [legacy support]
+    └── main_v2_2.py                         [legacy support]
+
+TOTAL SIZE: ~2-3 MB (just source code and template)
+
+INSTALLATION STEPS:
+  1. Extract package to desired location (e.g., C:\Program Files\DocumentManager)
+  2. Run: pip install -r requirements.txt
+  3. Run: python run_v2_3.py
+  4. (Optional) Create shortcut to run_v2_3.py
+
+================================================================================
+OPTION 2: WITH SAMPLE DATA (For Testing/Demo)
+================================================================================
+
+DocumentManager_v2.3_WithSamples/
+│
+├── [All files from OPTION 1]
+│
+├── sample csv/
+│   └── Export_20251006_090021 (3).htm       [137 KB, example data]
+│
+└── samples/
+    ├── sample csv/
+    │   └── [Additional sample CSV files]
+    │
+    └── sample plots/
+        └── [Sample PDF files for testing]
+
+TOTAL SIZE: ~5-10 MB (includes sample data)
+
+RECOMMENDATION: Include this for first-time users
+
+================================================================================
+OPTION 3: WITH FULL DOCUMENTATION
+================================================================================
+
+DocumentManager_v2.3_Full/
+│
+├── [All files from OPTION 2]
+│
+├── INSTALLER_REQUIREMENTS.md                [18 KB, technical spec]
+├── SOURCE_FILES_REFERENCE.md                [20 KB, detailed reference]
+├── QUICK_INSTALLER_SUMMARY.txt              [8 KB, quick ref]
+│
+└── docs/
+    ├── USER_GUIDE.md
+    ├── FEATURE_OVERVIEW.md
+    ├── FAQ.md
+    ├── TROUBLESHOOTING.md
+    ├── PRINTER_SETUP.md
+    └── ADVANCED_CONFIGURATION.md
+
+TOTAL SIZE: ~12-15 MB (full documentation)
+
+RECOMMENDATION: Best for production release
+
+================================================================================
+OPTION 4: STANDALONE EXECUTABLE (PyInstaller)
+================================================================================
+
+DocumentManager_v2.3_Standalone/
+│
+├── DocumentManager.exe                      [30-50 MB, standalone executable]
+│                                            [includes Python runtime + DLLs]
+│
+├── settings_v2_3.json                       [user config - created/modified]
+├── print_presets.json                       [printer config]
+│
+├── LABEL TEMPLATE/
+│   └── Contract_Lumber_Label_Template.docx
+│
+└── README.txt                               [Quick start instructions]
+
+TOTAL SIZE: ~40-60 MB (includes Python runtime)
+
+BUILD COMMAND:
+  pyinstaller --onefile --windowed \
+    --add-data "LABEL TEMPLATE:LABEL TEMPLATE" \
+    --add-data "settings_v2_3.json:." \
+    --add-data "print_presets.json:." \
+    --hidden-import=pywin32 \
+    --hidden-import=lxml \
+    --name DocumentManager \
+    --icon=icon.ico \
+    run_v2_3.py
+
+ADVANTAGES:
+  - No Python installation required
+  - Single .exe file to run
+  - All dependencies bundled
+  - Faster startup (pre-compiled bytecode)
+
+DISADVANTAGES:
+  - Much larger file size (40-60 MB vs 2 MB)
+  - Slower initial startup (unpacking)
+  - Less flexible for customization
+
+================================================================================
+OPTION 5: PORTABLE USB DEPLOYMENT
+================================================================================
+
+DocumentManager_v2.3_Portable/
+│
+├── python/                                  [Portable Python 3.9+ ~150 MB]
+│   ├── python.exe
+│   ├── Scripts/
+│   ├── Lib/
+│   └── DLLs/
+│
+├── launch.bat                               [Batch file launcher]
+│                                            [content: python.exe run_v2_3.py]
+│
+├── requirements.txt
+├── run_v2_3.py
+├── settings_v2_3.json
+├── print_presets.json
+│
+├── LABEL TEMPLATE/
+│   └── Contract_Lumber_Label_Template.docx
+│
+└── src/
+    └── [30 Python modules]
+
+TOTAL SIZE: ~200-250 MB (includes portable Python)
+
+ADVANTAGES:
+  - Works on any Windows machine
+  - No installation required
+  - Works from USB drive
+  - Can be run on network share
+
+DISADVANTAGES:
+  - Large file size
+  - Slower startup than native Python
+  - Network licensing restrictions may apply
+
+SETUP:
+  1. Download Python portable edition (e.g., from python-portable.com)
+  2. Extract to 'python' folder in package
+  3. Run: launch.bat
+  4. Alternatively: python\python.exe run_v2_3.py
+
+================================================================================
+OPTION 6: NETWORK DEPLOYMENT
+================================================================================
+
+\\server\applications\DocumentManager_v2.3\
+│
+├── run_v2_3.py
+├── requirements.txt
+├── settings_v2_3.json
+├── print_presets.json
+│
+├── LABEL TEMPLATE/
+│   └── Contract_Lumber_Label_Template.docx
+│
+├── src/                                     [network accessible]
+│   └── [30 Python modules]
+│
+├── archive/                                 [network shared, writable]
+│   └── [processed PDFs will be stored here]
+│
+└── document_manager_v2.1.db                 [network shared database]
+
+ADVANTAGES:
+  - Single installation point
+  - All users get same version
+  - Centralized data/archive
+  - Database with WAL mode supports concurrent access
+
+CONFIGURATION:
+  - Set archive_path in settings_v2_3.json to network path
+  - Ensure WAL mode enabled in enhanced_database_v2.py
+  - Create archive folder with write permissions
+  - Backup database regularly
+
+================================================================================
+RUNTIME DIRECTORY STRUCTURE (After First Run)
+================================================================================
+
+[Installation Directory]/
+│
+├── [All files from above]
+│
+├── document_manager_v2.1.db                 [CREATED: SQLite database]
+├── document_manager.log                     [CREATED: Debug log]
+│
+└── archive/                                 [CREATED: Processed files]
+    ├── [PDF files moved here]
+    │
+    └── [metadata.json]                      [JSON metadata for each PDF]
+
+DATABASE LOCATION: Same directory as run_v2_3.py (portable)
+
+LOG LOCATION: Same directory as run_v2_3.py (for troubleshooting)
+
+ARCHIVE LOCATION: Configurable via settings_v2_3.json
+  Default: ./archive/ (relative to script)
+  Can be: C:\Archive\ (absolute Windows path)
+  Can be: \\server\archive\ (network path)
+
+================================================================================
+FILE COUNTS BY CATEGORY
+================================================================================
+
+MINIMUM VIABLE INSTALLER:
+  6 config/support files    (requirements.txt, *.json)
+  1 launcher                (run_v2_3.py)
+  1 template                (Contract_Lumber_Label_Template.docx)
+  1 source directory        (src/ with 30 modules)
+  ──────────────────────────────
+  TOTAL: 9 items (~600 KB)
+
+RECOMMENDED INSTALLER:
+  6 config/support files
+  1 launcher
+  1 template
+  1 source directory (30 modules)
+  1 sample data directory
+  2 documentation files
+  ──────────────────────────────
+  TOTAL: 12 items (~2-5 MB)
+
+FULL INSTALLER:
+  6 config/support files
+  1 launcher
+  1 template
+  1 source directory (30 modules)
+  1 sample data directory
+  5 documentation files
+  1 docs directory with 6+ guides
+  ──────────────────────────────
+  TOTAL: 16+ items (~12-15 MB)
+
+================================================================================
+INSTALLATION VERIFICATION CHECKLIST
+================================================================================
+
+After unpacking/installing, verify:
+
+REQUIRED FILES PRESENT:
+  [ ] run_v2_3.py exists and is executable
+  [ ] src/ directory exists with 30 Python files
+  [ ] LABEL TEMPLATE/Contract_Lumber_Label_Template.docx exists
+  [ ] requirements.txt exists and is readable
+  [ ] settings_v2_3.json exists
+  [ ] print_presets.json exists and is valid JSON
+
+PYTHON ENVIRONMENT:
+  [ ] Python 3.7+ installed (if Python installation)
+  [ ] pip available: python -m pip --version
+  [ ] tkinter available: python -m tkinter (opens test window)
+  [ ] All dependencies installed: pip install -r requirements.txt
+
+APPLICATION STARTUP:
+  [ ] Application starts: python run_v2_3.py
+  [ ] GUI window appears (main calendar view)
+  [ ] No import errors in console
+  [ ] No file not found errors
+
+FIRST RUN:
+  [ ] CSV import dialog opens: Click "Import CSV"
+  [ ] PDF folder dialog opens: Click "Sync PDF Folder"
+  [ ] Database file created: document_manager_v2.1.db
+  [ ] Log file created: document_manager.log
+  [ ] Settings file created/updated: settings_v2_3.json
+
+BASIC FUNCTIONALITY:
+  [ ] Can import CSV file
+  [ ] Can browse and select PDF folder
+  [ ] Calendar displays dates
+  [ ] Can click on dates to see details
+  [ ] Can save/load settings
+  [ ] Log file contains operation details
+
+ERROR RECOVERY:
+  [ ] Deleting database allows fresh start
+  [ ] Deleting settings allows reconfiguration
+  [ ] Log file shows detailed error messages
+  [ ] No corruption on network share test
+
+================================================================================
+SIZE COMPARISONS
+================================================================================
+
+Typical Installation Sizes:
+
+Python-based (src only):       600 KB - 1 MB
+Python + samples:              2-5 MB
+Python + docs:                 2-3 MB
+Python + samples + docs:       5-10 MB
+Standalone .exe:               40-60 MB
+Portable with Python:          150-200 MB
+Network deployment:            600 KB (+ shared database)
+
+STORAGE REQUIREMENTS:
+  Minimum:   100 MB (for runtime data, archives, database)
+  Typical:   500 MB (with sample data and logs)
+  Maximum:   1 GB+ (long-term storage of archives)
+
+DATABASE GROWTH:
+  Initial:   ~100 KB (empty tables)
+  100 orders:  ~50 KB (relationships + history)
+  1000 orders: ~500 KB (includes change history)
+  10000 orders: ~5 MB (maximum typical case)
+
+================================================================================
+VERSION MIGRATION PATH
+================================================================================
+
+For users upgrading from older versions:
+
+V1.0 → V2.3:
+  1. Keep existing document_manager.db (optional - new DB will be created)
+  2. Keep settings.json (V2.3 can read old settings)
+  3. Extract V2.3 to new folder or overwrite src/ (keep root files)
+  4. Run: python run_v2_3.py
+  5. Re-import CSV and re-sync PDFs (data in new database format)
+
+V2.1 → V2.3:
+  1. Keep document_manager_v2.1.db (direct compatibility)
+  2. Keep settings_v2.json (will be migrated to V2.3)
+  3. Replace src/ files with V2.3
+  4. Run: python run_v2_3.py
+
+V2.2 → V2.3:
+  1. Keep document_manager_v2.1.db (direct compatibility)
+  2. Keep settings_v2_2.json (will be migrated to V2.3)
+  3. Update src/main_v2_3.py and related files
+  4. Run: python run_v2_3.py
+
+NO DATA LOSS: Archive folder and database persist across versions
+
+================================================================================
+RECOMMENDED DISTRIBUTION METHOD
+================================================================================
+
+FOR MOST USERS:
+  Use OPTION 1 (Python Installation) + sample CSV
+  - Size: ~2 MB
+  - Simplicity: High
+  - Flexibility: High
+  - Requires: Python 3.7+
+
+FOR NON-TECHNICAL USERS:
+  Use OPTION 4 (Standalone .exe)
+  - Size: ~50 MB
+  - Simplicity: Maximum (just click .exe)
+  - Flexibility: Medium
+  - Requires: Nothing (self-contained)
+
+FOR NETWORK/ENTERPRISE:
+  Use OPTION 6 (Network Deployment)
+  - Size: ~1 MB per installation (shared)
+  - Centralized management
+  - Database shared via network
+  - Backup friendly
+
+FOR DISTRIBUTION ON USB/FLASH DRIVE:
+  Use OPTION 5 (Portable)
+  - Size: ~200 MB
+  - Works anywhere
+  - No installation needed
+
+================================================================================

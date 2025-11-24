@@ -1,0 +1,256 @@
+================================================================================
+FIX: Nothing Printing + Missing Bookmarks Warnings
+================================================================================
+
+ISSUE 1: Missing bookmark warnings in log
+ISSUE 2: Nothing physically printing from \\vcoloprint\FB-Labels
+ISSUE 3: "Access denied" warnings for printer configuration
+
+================================================================================
+SOLUTION FOR ISSUE 1: Missing Bookmarks
+================================================================================
+
+The code was trying to fill bookmarks that don't exist in your template:
+- ❌ JobReference (not in template)
+- ❌ DeliveryArea (not in template)
+- ❌ Designer (not in template)
+
+FIXED: Updated code to ONLY fill bookmarks that exist:
+- ✓ Customer (exists)
+- ✓ OrderNumber (exists)
+
+This will eliminate the warnings in the log.
+
+FILE TO UPDATE:
+  src\word_template_processor.py
+
+Copy this file from dev machine to user's machine via USB.
+
+
+================================================================================
+SOLUTION FOR ISSUE 2: Nothing Printing
+================================================================================
+
+The "successfully printed" message means Word sent the print command, but the
+physical printer didn't receive it or isn't working.
+
+TROUBLESHOOTING STEPS:
+
+Step 1: Check if printer is accessible
+---------------------------------------
+Open Command Prompt on user's machine:
+
+  ping vcoloprint
+
+Expected: Replies from vcoloprint
+If timeout: Print server unreachable (network issue)
+
+
+Step 2: Check if printer is installed
+--------------------------------------
+1. Control Panel → Devices and Printers
+2. Look for: \\vcoloprint\FB-Labels
+
+If NOT there: Printer not installed, need to add it
+
+
+Step 3: Test print from Windows
+--------------------------------
+1. Control Panel → Devices and Printers
+2. Right-click: \\vcoloprint\FB-Labels
+3. Click "Print Test Page"
+
+Did it print?
+  ✓ YES → Printer works, continue to Step 4
+  ✗ NO  → Printer problem, see below
+
+
+Step 4: Test print from Word
+-----------------------------
+1. Open Word
+2. Type "TEST"
+3. File → Print
+4. Select: \\vcoloprint\FB-Labels
+5. Print
+
+Did it print?
+  ✓ YES → Word can print to this printer
+  ✗ NO  → Word/printer driver issue
+
+
+Step 5: Check printer status
+-----------------------------
+1. Control Panel → Devices and Printers
+2. Double-click: \\vcoloprint\FB-Labels
+3. Look at print queue window
+
+Status should be:
+  ✓ Ready (good)
+  ✗ Offline (bad - printer not connected)
+  ✗ Error (bad - printer has problem)
+  ✗ Paused (bad - printer is paused)
+
+If offline/error/paused:
+  - Check physical printer (power, paper, errors)
+  - Right-click printer → "Use Printer Online"
+  - Right-click printer → "Resume Printing"
+
+
+================================================================================
+SOLUTION FOR ISSUE 3: Access Denied
+================================================================================
+
+The "Access denied" warning appears when trying to configure printer settings.
+
+This happens because:
+- User doesn't have admin rights
+- Network printer permissions restricted
+- Can't modify printer driver settings
+
+GOOD NEWS: This is just a WARNING, not an error. The code says:
+  "will try print-time scaling"
+
+This means it continues printing anyway, just can't pre-configure the printer.
+
+For label printing: This shouldn't affect simple text labels.
+For PDF printing: May affect scaling/fitting to page.
+
+IF THIS CAUSES PROBLEMS:
+1. Ask IT to grant printer permissions
+2. Or print server admin needs to allow users to modify print settings
+3. Or use a different printer that allows configuration
+
+
+================================================================================
+MOST LIKELY CAUSE OF "NOTHING PRINTING"
+================================================================================
+
+Based on your logs, the most likely causes are:
+
+Cause 1: Printer is offline or not ready
+-----------------------------------------
+Physical printer:
+- Not powered on
+- Out of labels/paper
+- Paper jam
+- Error state
+- Not connected to network
+
+FIX: Check physical printer, reload paper, clear errors
+
+
+Cause 2: Print queue stuck
+---------------------------
+Previous print jobs blocking new ones
+
+FIX: Run CLEAR_PRINT_QUEUE.bat (as Administrator)
+Or manually:
+  1. Services → Print Spooler → Stop
+  2. Delete: C:\Windows\System32\spool\PRINTERS\*.*
+  3. Services → Print Spooler → Start
+
+
+Cause 3: Network printer not accessible
+----------------------------------------
+Can't reach \\vcoloprint server
+
+FIX: Check network connection, verify with IT
+
+
+Cause 4: Wrong printer selected
+--------------------------------
+Application thinks it's printing to \\vcoloprint\FB-Labels
+but printer has different name or isn't installed
+
+FIX: Run LIST_ALL_PRINTERS.bat to see actual printer names
+Compare with what's configured in application
+
+
+Cause 5: Printer permissions
+-----------------------------
+User doesn't have permission to print to this network printer
+
+FIX: Ask IT to grant print permission
+Or use different printer user has access to
+
+
+================================================================================
+DIAGNOSTIC TOOLS
+================================================================================
+
+Copy these files to user's machine via USB:
+
+  TEST_PRINTER.bat - Full printer diagnostic
+  CLEAR_PRINT_QUEUE.bat - Clear stuck jobs
+  LIST_ALL_PRINTERS.bat - Show all available printers
+  PRINTER_TROUBLESHOOTING.txt - Detailed troubleshooting guide
+
+
+================================================================================
+QUICK TEST PROCEDURE
+================================================================================
+
+1. On user's machine, open Command Prompt:
+   ping vcoloprint
+
+2. Open Control Panel → Devices and Printers
+   - Is \\vcoloprint\FB-Labels there?
+   - Right-click → Print Test Page
+   - Did it print?
+
+3. If test page prints:
+   - Printer works!
+   - Issue is with application/template/bookmarks
+   - Copy updated src\word_template_processor.py
+   - Test label printing again
+
+4. If test page doesn't print:
+   - Printer problem (not application problem)
+   - Check physical printer
+   - Check network connection
+   - Check with IT about printer access
+
+
+================================================================================
+WHAT TO COPY TO USER'S MACHINE
+================================================================================
+
+Required:
+  src\word_template_processor.py (fixes bookmark warnings)
+
+Optional (for troubleshooting):
+  TEST_PRINTER.bat
+  CLEAR_PRINT_QUEUE.bat
+  LIST_ALL_PRINTERS.bat
+  PRINTER_TROUBLESHOOTING.txt
+  CHECK_ONEDRIVE_TEMPLATE.py
+  CHECK_ONEDRIVE_TEMPLATE.bat
+
+
+================================================================================
+AFTER COPYING FILES
+================================================================================
+
+1. Test label printing from application
+
+2. Check log file for:
+   ✓ Should see: "Filled bookmark Customer"
+   ✓ Should see: "Filled bookmark OrderNumber"
+   ✓ Should NOT see: "Bookmark not found" warnings anymore
+   ✓ Should see: "Successfully printed folder label"
+
+3. Check physical printer:
+   ✓ Did label actually come out?
+   ✓ Does label have Customer name?
+   ✓ Does label have Order number?
+
+4. If label printed with correct info:
+   ✓ SUCCESS! Issue resolved
+
+5. If still nothing prints:
+   → Printer problem (not application problem)
+   → Run TEST_PRINTER.bat diagnostics
+   → Work with IT to fix printer
+
+
+================================================================================

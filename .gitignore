@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+env/
+ENV/
+
+# Virtual environments
+python/
+python-embedded/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Build outputs
+*.exe
+*.spec
+
+# Environment files
+.env
+.env.local
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# User-specific settings (keep example files only)
+settings.json
+settings_v2.json
+settings_v2_2.json
+settings_v2_3.json
+settings_v2_4.json
+print_presets.json
+
+# Test data and samples
+samples/
+sample csv/
+tests/html/
+tests/plots/
+archive/
+
+# Deployment specific
+TEAMS_DEPLOYMENT/
+document-manager-web/
+
+# Design files
+DESIGN FILES/

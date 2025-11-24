@@ -1,0 +1,104 @@
+================================================================================
+INSTALLATION WITHOUT ADMIN RIGHTS
+================================================================================
+
+For user: jjanney
+Python location: C:\Users\jjanney\AppData\Local\Programs\Python\Python312
+
+================================================================================
+QUICK INSTALL - 3 Steps
+================================================================================
+
+STEP 1: Double-click this file
+--------
+INSTALL_FOR_JJANNEY.bat
+
+
+STEP 2: Wait for installation
+--------
+The script will:
+- Install pandas, PyPDF2, pywin32, lxml
+- Use --user flag (no admin needed)
+- Create START_APP.bat
+- Verify everything works
+
+
+STEP 3: Run the application
+--------
+Double-click: START_APP.bat
+
+
+================================================================================
+MANUAL INSTALL (if needed)
+================================================================================
+
+Open Command Prompt (NO admin needed) and run:
+
+cd "C:\code\Document Manager"
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user pandas
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user PyPDF2
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user pywin32
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user lxml
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pywin32_postinstall -install
+
+
+Verify:
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -c "import pandas; import PyPDF2; import win32com.client; import lxml; print('All OK')"
+
+
+Run app:
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" run_v2_3.py
+
+
+================================================================================
+KEY POINTS
+================================================================================
+
+✓ NO ADMIN RIGHTS NEEDED
+  The --user flag installs to your user profile only
+
+✓ FULL PYTHON PATH USED
+  Using full path: C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe
+  This ensures we use the correct Python
+
+✓ START_APP.bat WILL USE CORRECT PYTHON
+  After running INSTALL_FOR_JJANNEY.bat, START_APP.bat is updated with
+  the full path to your Python
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+If packages already installed but app won't run:
+-------------------------------------------------
+The packages might be in the wrong Python. Just run:
+
+INSTALL_FOR_JJANNEY.bat
+
+This will install them to the CORRECT Python for user jjanney.
+
+
+If you get "pip not found":
+----------------------------
+Use python -m pip instead:
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user pandas PyPDF2 pywin32 lxml
+
+
+If pywin32 fails:
+-----------------
+Sometimes pywin32 has issues. Try:
+
+"C:\Users\jjanney\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user pywin32==305
+
+
+If path is different:
+--------------------
+Edit INSTALL_FOR_JJANNEY.bat and change the PYTHON variable to your actual path.
+
+================================================================================

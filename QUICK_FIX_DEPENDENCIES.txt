@@ -1,0 +1,62 @@
+================================================================================
+QUICK FIX - Missing Dependencies Error
+================================================================================
+
+PROBLEM: pip install says "requirements satisfied" but app won't start
+
+CAUSE: You have multiple Python installations. pip installed to one Python,
+       but START_APP.bat is running a different Python that doesn't have them.
+
+================================================================================
+SOLUTION - Choose ONE option:
+================================================================================
+
+OPTION 1: Automated Fix (RECOMMENDED)
+--------------------------------------
+Double-click this file:
+  FIX_DEPENDENCIES.bat
+
+It will:
+  1. Find the correct Python
+  2. Install all packages to that Python
+  3. Update START_APP.bat
+  4. Verify everything works
+
+
+OPTION 2: Manual Fix
+--------------------
+1. Open Command Prompt
+
+2. Run these commands (use python -m pip, NOT just pip):
+
+   python -m pip install --upgrade pip
+   python -m pip install pandas PyPDF2 pywin32 lxml
+   python -m pywin32_postinstall -install
+
+3. Verify:
+   python -c "import pandas; import PyPDF2; import win32com.client; print('OK')"
+
+4. Run: START_APP.bat
+
+
+OPTION 3: Diagnose First
+-------------------------
+If you want to understand the problem first:
+
+1. Run: DIAGNOSE_PYTHON.bat
+2. Look at the output to see which Python has packages
+3. Then run: FIX_DEPENDENCIES.bat
+
+
+================================================================================
+KEY POINT
+================================================================================
+
+ALWAYS use:  python -m pip install <package>
+NOT just:    pip install <package>
+
+The "-m pip" ensures you install to the correct Python!
+
+================================================================================
+
+Still having issues? Check MANUAL_FIX_GUIDE.md for detailed troubleshooting.

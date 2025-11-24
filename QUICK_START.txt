@@ -1,0 +1,147 @@
+================================================================================
+DOCUMENT MANAGER V2.3 - QUICK START
+================================================================================
+
+READY TO USE - NO TERMINAL NEEDED!
+
+--------------------------------------------------------------------------------
+LAUNCHING THE APPLICATION
+--------------------------------------------------------------------------------
+
+For normal use:
+  → Double-click: START_APP.bat
+
+For testing changes:
+  → Double-click: START_APP_TEST.bat
+
+That's it! The batch file will:
+  ✓ Find Python automatically
+  ✓ Launch the application
+  ✓ Show any errors if they occur
+
+--------------------------------------------------------------------------------
+FIRST TIME SETUP
+--------------------------------------------------------------------------------
+
+If you see "missing dependencies" error:
+
+1. Open Command Prompt in this folder
+   (Shift + Right-click → "Open PowerShell window here")
+
+2. Run:
+   python -m pip install -r requirements.txt
+
+3. Run START_APP.bat again
+
+--------------------------------------------------------------------------------
+YOUR WORKFLOW
+--------------------------------------------------------------------------------
+
+Daily Use:
+  1. Double-click START_APP.bat
+  2. Work in the application
+  3. Close when done
+
+Testing Changes:
+  1. Make code changes
+  2. Double-click START_APP_TEST.bat
+  3. Test your changes
+  4. Repeat until satisfied
+
+Ready for Production:
+  1. Your changes are already live (same folder)
+  OR
+  2. For network deployment: Run DEPLOY_TO_PRODUCTION.bat
+
+--------------------------------------------------------------------------------
+NETWORK DEPLOYMENT (3-5 USERS)
+--------------------------------------------------------------------------------
+
+When ready to deploy to multiple users:
+
+1. Read: NETWORK_DEPLOYMENT_SETUP_GUIDE.md
+2. Set up folder structure on network share
+3. Use DEPLOY_TO_PRODUCTION.bat to push updates
+
+Users will just:
+  → Navigate to: \\SERVER\Apps\DocumentManager\PRODUCTION\
+  → Double-click: START_APP.bat
+
+--------------------------------------------------------------------------------
+FILES CREATED FOR YOU
+--------------------------------------------------------------------------------
+
+✓ START_APP.bat
+  → Production launcher (what users will run)
+
+✓ START_APP_TEST.bat
+  → Testing launcher (warnings shown)
+
+✓ DEPLOY_TO_PRODUCTION.bat
+  → Copies tested code to production folder
+  → Creates automatic backups
+  → Verification built-in
+
+✓ NETWORK_DEPLOYMENT_SETUP_GUIDE.md
+  → Complete guide for network deployment
+  → Troubleshooting section
+  → User onboarding instructions
+
+✓ Database updated (src/enhanced_database_v2.py)
+  → WAL mode enabled for better concurrent access
+  → Prevents locking issues on network shares
+
+--------------------------------------------------------------------------------
+KEY BENEFITS
+--------------------------------------------------------------------------------
+
+✓ No executables to distribute
+✓ No network access blocking
+✓ Full printer functionality maintained
+✓ Easy updates (change once, affects all users)
+✓ Separate testing environment
+✓ Automatic backups on deployment
+
+--------------------------------------------------------------------------------
+NEED HELP?
+--------------------------------------------------------------------------------
+
+For detailed information:
+  → Read: NETWORK_DEPLOYMENT_SETUP_GUIDE.md
+
+For printer issues:
+  → Run: run_diagnostics.bat
+
+For printer setup:
+  → Run: run_printer_setup.bat
+
+For deployment help:
+  → See "Daily Workflow" section in the guide
+
+--------------------------------------------------------------------------------
+QUICK REFERENCE
+--------------------------------------------------------------------------------
+
+Current Location:
+  %~dp0
+
+Your Printers Config:
+  network_printers.json (network-wide)
+  user_preferences.json (your preferences)
+
+Your Settings:
+  settings_v2_3.json
+
+Your Database:
+  document_manager_v2.1.db (now with WAL mode!)
+
+================================================================================
+YOU'RE READY TO GO!
+================================================================================
+
+Just double-click START_APP.bat to launch without the terminal.
+
+For testing: Use START_APP_TEST.bat
+For deployment: Read NETWORK_DEPLOYMENT_SETUP_GUIDE.md
+
+================================================================================

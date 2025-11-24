@@ -1,0 +1,254 @@
+================================================================================
+DOCUMENT MANAGER - QUICK INSTALLER SUMMARY
+================================================================================
+
+PROJECT OVERVIEW
+================================================================================
+Name:           Document Manager V2.3
+Type:           Windows Desktop Application (Python + tkinter)
+Purpose:        Correlate Bistrack CSV exports with PDF plot files
+Size:           24MB (30 Python modules, 14,514 lines of code)
+Latest Version: V2.3 (Enhanced expanded view with batch processing)
+
+KEY FACTS FOR INSTALLER BUILDERS
+================================================================================
+
+1. ENTRY POINT
+   - File: run_v2_3.py (latest) or run_app.py (v1.0)
+   - Command: python run_v2_3.py
+   - Framework: tkinter (Python built-in GUI)
+
+2. CRITICAL FILES TO INCLUDE
+   ✓ run_v2_3.py                 (8 lines - minimal launcher)
+   ✓ src/ (30 Python modules)    (14,514 lines total)
+   ✓ LABEL TEMPLATE/
+     └─ Contract_Lumber_Label_Template.docx  (70 KB - MUST INCLUDE)
+   ✓ settings_v2_3.json           (config template)
+   ✓ print_presets.json           (printer presets)
+   ✓ requirements.txt             (dependencies)
+
+3. OPTIONAL FILES TO INCLUDE
+   - sample csv/                  (example data)
+   - samples/                     (test PDFs)
+   - docs/                        (documentation)
+   - README.md                    (user guide)
+
+4. DO NOT INCLUDE
+   ✗ document_manager_v2.1.db     (created at runtime)
+   ✗ document_manager.log         (created at runtime)
+   ✗ __pycache__/                 (compiled Python)
+   ✗ .git/, .claude/              (development files)
+   ✗ build/, dist/                (build artifacts)
+   ✗ archive/                     (runtime data)
+
+5. DEPENDENCIES (from requirements.txt)
+   - pandas          - CSV data handling
+   - PyPDF2          - PDF text extraction
+   - pywin32         - Windows printer access
+   - lxml            - Word document editing
+   - tkinter         - (built-in GUI framework)
+   - sqlite3         - (built-in database)
+
+6. SYSTEM REQUIREMENTS
+   - Windows 7 or later
+   - Python 3.7+ (3.9+ recommended)
+   - ~100 MB disk space after installation
+   - Microsoft Word (optional, for label generation)
+
+7. INSTALLATION OPTIONS
+
+   A) PYTHON-BASED (Easiest)
+      1. pip install -r requirements.txt
+      2. python run_v2_3.py
+
+   B) PYINSTALLER EXECUTABLE
+      pyinstaller --onefile --windowed \
+        --add-data "LABEL TEMPLATE:LABEL TEMPLATE" \
+        --add-data "settings_v2_3.json:." \
+        --add-data "print_presets.json:." \
+        --hidden-import=pywin32 \
+        --hidden-import=lxml \
+        run_v2_3.py
+
+   C) PORTABLE DEPLOYMENT
+      Document Manager/
+      ├── python.exe (or portable Python)
+      ├── run_v2_3.py
+      ├── src/
+      ├── LABEL TEMPLATE/
+      ├── settings_v2_3.json
+      ├── print_presets.json
+      └── requirements.txt
+
+8. RUNTIME DATA (Created Automatically)
+   - document_manager_v2.1.db    (SQLite database)
+   - document_manager.log        (error/debug logs)
+   - archive/                    (processed files)
+
+9. APPLICATION VERSIONS AVAILABLE
+   v1.0 (run_app.py)        - Basic CSV-PDF matching
+   v2.1 (run_v2_1.py)       - Enhanced DB with relationships
+   v2.2 (run_v2_2.py)       - Statistics calendar widget
+   v2.3 (run_v2_3.py)       - Enhanced view + batch print ⭐ LATEST
+
+10. KEY FEATURES IN V2.3
+    - 10-box weekday calendar display
+    - Category-based order organization (Green/Red/Gray)
+    - PDF attachment/replacement interface
+    - Batch printing with label generation
+    - Word template automation
+    - Network printer support
+    - Archive/backup system
+    - SQLite database with audit trail
+
+APPLICATION ARCHITECTURE
+================================================================================
+
+Presentation Layer (GUI)
+├── main_v2_3.py                    Main app window
+├── statistics_calendar_widget.py   10-box calendar
+├── enhanced_expanded_view.py       Details view
+└── print_preset_ui.py              Printer config
+
+Business Logic Layer
+├── pdf_processor.py                Extract sales orders
+├── relationship_manager.py         Link orders to PDFs
+├── word_template_processor.py      Generate labels
+├── batch_print_with_presets.py     Print management
+└── archive_manager.py              Archive processing
+
+Data Layer
+├── enhanced_database_v2.py         Main database
+├── database_manager.py             Legacy support
+└── document_manager_v2.1.db        (created at runtime)
+
+Support Layer
+├── print_diagnostics.py            Printer troubleshooting
+├── error_logger.py                 Error tracking
+├── log_viewer.py                   Log display
+└── user_preferences.py             Settings management
+
+WORKFLOW
+================================================================================
+
+1. User imports Bistrack CSV file
+2. PDF Processor scans PDF folder
+   ├─ Tries to extract sales order from filename
+   └─ Falls back to PDF content extraction
+3. Sales orders matched against CSV records
+4. Relationship Manager creates order-PDF links
+5. Enhanced Database stores relationships + history
+6. Calendar displays unprocessed items (Mon-Fri only)
+7. User clicks date → Expanded view shows details
+8. Items categorized:
+   ├─ Green: Ready to print (has PDF)
+   ├─ Red: Missing PDF
+   └─ Gray: Already processed
+9. User can:
+   ├─ View/download PDF links
+   ├─ Attach missing PDFs
+   ├─ Batch print all
+   └─ Auto-generate labels
+10. Archive Manager moves processed items to archive
+11. Database marks as processed
+12. Items disappear from calendar
+
+CONFIGURATION
+================================================================================
+
+Settings File: settings_v2_3.json
+  - CSV import path
+  - PDF scan folder
+  - Archive location
+  - Printer settings
+
+Printer Presets: print_presets.json
+  - "Standard Plot" (2 printers)
+  - "11x17 Only" (single large)
+  - "24x36 Only" (very large)
+
+Template: LABEL TEMPLATE/Contract_Lumber_Label_Template.docx
+  - Word document for shipping labels
+  - Auto-filled with order details
+
+DATABASE SCHEMA
+================================================================================
+
+relationships
+  ├─ relationship_id (unique)
+  ├─ order_number
+  ├─ csv_data (JSON)
+  ├─ pdf_path
+  ├─ created_date
+  ├─ processed (boolean)
+  └─ processed_date
+
+pdf_change_history
+  ├─ relationship_id
+  ├─ action (attach/replace/remove)
+  ├─ old_pdf_path
+  ├─ new_pdf_path
+  └─ timestamp
+
+processing_log
+  ├─ operation_type (sync/import/match/etc)
+  ├─ relationship_id
+  ├─ details (JSON)
+  └─ timestamp
+
+search_history
+  ├─ search_term
+  ├─ search_type
+  ├─ results_count
+  └─ timestamp
+
+archive_log
+  ├─ relationship_id
+  ├─ original_path
+  ├─ archive_path
+  └─ archive_date
+
+INSTALLER CHECKLIST
+================================================================================
+
+Before releasing as installer, verify:
+
+□ Python requirements installable: pip install -r requirements.txt
+□ Template file present: LABEL TEMPLATE/Contract_Lumber_Label_Template.docx
+□ Settings valid: settings_v2_3.json loads without error
+□ Printer presets valid: print_presets.json is valid JSON
+□ All src/ modules importable without errors
+□ Entry point runs: python run_v2_3.py starts GUI
+□ Database creates on first run
+□ CSV import dialog works
+□ PDF folder scan works
+□ Calendar displays correctly
+□ PDF extraction finds order numbers
+□ Print dialog appears
+□ Archive functionality works
+□ Settings persist after restart
+□ Log file created: document_manager.log
+
+FILE MANIFEST FOR INSTALLER
+================================================================================
+
+MUST INCLUDE:
+  run_v2_3.py                                    1 file
+  requirements.txt                               1 file
+  settings_v2_3.json                             1 file
+  print_presets.json                             1 file
+  src/                                           30 files
+  LABEL TEMPLATE/Contract_Lumber_Label_Template.docx  1 file
+  
+RECOMMENDED:
+  README.md                                      1 file
+  sample csv/Export_20251006_090021 (3).htm     1 file
+  samples/sample csv/                            files
+  samples/sample plots/                          files
+  docs/                                          files
+
+TOTAL: ~35-50 files, 24MB minimum
+
+For detailed information, see INSTALLER_REQUIREMENTS.md
+
+================================================================================

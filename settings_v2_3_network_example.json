@@ -1,0 +1,32 @@
+{
+  "_comment": "Example configuration for network/shared installation",
+  "_instructions": [
+    "1. Copy this file and rename to settings_v2_3.json",
+    "2. Replace SERVER with your actual server name",
+    "3. Update paths to match your network share locations",
+    "4. Ensure all users have read/write access to the db_path location",
+    "5. All users must use the SAME db_path to share data"
+  ],
+  "html_path": "\\\\SERVER\\SharedData\\DocumentManager\\Bistrack Exports",
+  "pdf_path": "\\\\SERVER\\SharedData\\DocumentManager\\PDFs",
+  "archive_path": "\\\\SERVER\\SharedData\\DocumentManager\\Archive",
+  "db_path": "\\\\SERVER\\SharedData\\DocumentManager\\document_manager_v2.1.db",
+  "printer1_name": "",
+  "printer1_color_mode": "Color",
+  "printer1_copies": 1,
+  "printer1_enabled": true,
+  "printer2_name": "",
+  "printer2_color_mode": "Color",
+  "printer2_copies": 1,
+  "printer2_enabled": true,
+  "folder_printer_name": "",
+  "folder_printer_enabled": true,
+  "version": "2.3.0",
+  "_notes": [
+    "Database supports 2-3 concurrent users safely, up to 10 users total",
+    "SQLite with WAL mode is used for better concurrent access",
+    "For more than 10 users, consider upgrading to SQL Server or PostgreSQL",
+    "Network paths must use double backslashes in JSON format",
+    "UNC paths (\\\\SERVER\\Share) are recommended over mapped drives"
+  ]
+}

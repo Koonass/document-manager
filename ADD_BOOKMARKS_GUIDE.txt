@@ -1,0 +1,178 @@
+================================================================================
+HOW TO ADD BOOKMARKS TO WORD TEMPLATE
+================================================================================
+
+ERROR: "bookmark not found in template"
+
+This means your Word template is missing the required bookmarks.
+
+================================================================================
+QUICK FIX - Add Bookmarks to Template
+================================================================================
+
+STEP 1: Open the template
+---------------------------
+Navigate to:
+  C:\code\Document Manager\LABEL TEMPLATE\Contract_Lumber_Label_Template.docx
+
+Double-click to open in Microsoft Word
+
+
+STEP 2: Add bookmarks for each field
+-------------------------------------
+For EACH field where you want order data to appear:
+
+a) SELECT the text/placeholder
+   Example: Select "Customer Name Here" or "BUILDER NAME"
+
+b) Click INSERT tab → Bookmark button
+
+c) Type the bookmark name EXACTLY as shown below
+
+d) Click ADD
+
+e) The text should now have a bookmark (might see gray brackets in Word)
+
+
+STEP 3: Required bookmarks to add
+----------------------------------
+You MUST add these 4 bookmarks:
+
+Bookmark Name: builder
+  → Maps to: Customer Name
+  → Select text where customer name should appear
+  → Insert → Bookmark → Type "builder" → Add
+
+Bookmark Name: Lot / subdivision
+  → Maps to: Job Reference/Lot Number
+  → Select text where lot/job info should appear
+  → Insert → Bookmark → Type "Lot / subdivision" → Add
+  → NOTE: Include the space and forward slash!
+
+Bookmark Name: floors
+  → Maps to: Delivery Area/Floor
+  → Select text where delivery area should appear
+  → Insert → Bookmark → Type "floors" → Add
+
+Bookmark Name: designer
+  → Maps to: Designer Name
+  → Select text where designer name should appear
+  → Insert → Bookmark → Type "designer" → Add
+
+
+STEP 4: Optional bookmarks
+---------------------------
+These are optional but recommended:
+
+Bookmark Name: OrderNumber
+  → Maps to: Order Number
+  → Select text where order number should appear
+  → Insert → Bookmark → Type "OrderNumber" → Add
+
+Bookmark Name: DatePrinted
+  → Maps to: Print Date/Time (auto-generated)
+  → Select text where print date should appear
+  → Insert → Bookmark → Type "DatePrinted" → Add
+
+
+STEP 5: Save the template
+--------------------------
+File → Save (or Ctrl+S)
+Close Microsoft Word
+
+
+STEP 6: Verify the bookmarks
+-----------------------------
+Run this to check if bookmarks are correct:
+
+  CHECK_TEMPLATE_BOOKMARKS.bat
+
+This will show you which bookmarks were found and which are missing.
+
+
+================================================================================
+IMPORTANT NOTES
+================================================================================
+
+✓ Bookmark names are CASE-SENSITIVE
+  Must be exactly: builder, floors, designer, "Lot / subdivision"
+
+✓ "Lot / subdivision" includes space and slash
+  Type it exactly: Lot / subdivision
+
+✓ Don't delete the text when adding bookmarks
+  Select the text, then add bookmark - text stays
+
+✓ You can reuse bookmarks
+  If you delete text with a bookmark, you need to recreate the bookmark
+
+✓ Verify after adding
+  Run CHECK_TEMPLATE_BOOKMARKS.bat to confirm
+
+================================================================================
+ALTERNATIVE: Use the Sample Template
+================================================================================
+
+If you want a pre-configured template:
+
+1. Check if there's a working template in:
+   C:\code\Document Manager\DESIGN FILES\Template.docx
+
+2. Copy it to:
+   C:\code\Document Manager\LABEL TEMPLATE\Contract_Lumber_Label_Template.docx
+
+3. Run CHECK_TEMPLATE_BOOKMARKS.bat to verify
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Can't see bookmark names in Word?
+----------------------------------
+File → Options → Advanced → Show document content
+→ Check "Show bookmarks"
+Now you'll see bookmarks with gray [ ] brackets
+
+
+Bookmark disappears when typing?
+---------------------------------
+When you type in a bookmarked area, the bookmark gets deleted.
+You need to re-add it after typing.
+
+
+Wrong bookmark name used?
+--------------------------
+Delete the bookmark:
+  Insert → Bookmark → Select bookmark → Delete
+
+Then add it again with correct name.
+
+
+Still getting "bookmark not found"?
+------------------------------------
+1. Run CHECK_TEMPLATE_BOOKMARKS.bat
+2. Compare output to required bookmarks above
+3. Add any missing bookmarks
+4. Save template
+5. Test printing again
+
+================================================================================
+WHAT THE CODE EXPECTS
+================================================================================
+
+The word_template_processor.py file looks for these EXACT bookmark names:
+
+  builder           → Customer name
+  Lot / subdivision → Job reference
+  floors            → Delivery area
+  designer          → Designer name
+  OrderNumber       → Order number (optional)
+  DatePrinted       → Print timestamp (optional)
+
+If your template has DIFFERENT bookmark names (like "Customer" or "LotSub"),
+the code won't find them and you'll get "bookmark not found" error.
+
+================================================================================
+
+Need more help? Run: CHECK_TEMPLATE_BOOKMARKS.bat
+This will show exactly which bookmarks are missing.

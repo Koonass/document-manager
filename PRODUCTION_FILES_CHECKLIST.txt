@@ -1,0 +1,105 @@
+================================================================================
+DOCUMENT MANAGER V2.3 - PRODUCTION FILES CHECKLIST
+================================================================================
+
+This lists the MINIMAL files needed for production deployment.
+Everything else can be safely deleted from the user's shared folder.
+
+================================================================================
+ESSENTIAL FILES - KEEP THESE
+================================================================================
+
+ROOT FOLDER:
+  ✓ START_APP.bat                    - Application launcher
+  ✓ run_v2_3.py                      - Main application entry point
+  ✓ settings_v2_3.json               - Application settings
+  ✓ requirements.txt                 - Python dependencies list
+  ✓ SETUP_NEW_USER.bat               - New user onboarding script
+  ✓ FIX_PYWIN32_FOR_USER.bat         - Troubleshooting tool (optional but useful)
+
+FOLDERS:
+  ✓ src/                             - ALL Python source code (entire folder)
+  ✓ LABEL TEMPLATE/                  - Word templates for printing
+       └── Contract_Lumber_Label_Template.docx
+
+DATABASE:
+  ✓ document_manager.db              - Main database (check settings for actual location)
+  ✓ document_manager_v2.db           - (or whatever your database is named)
+
+================================================================================
+DELETE THESE - NOT NEEDED FOR PRODUCTION
+================================================================================
+
+DOCUMENTATION FILES (delete all .md and .txt except requirements.txt):
+  ✗ README.md
+  ✗ All other *.md files (100+ documentation files)
+  ✗ All *.txt files except requirements.txt
+
+DEVELOPMENT/TESTING SCRIPTS:
+  ✗ run_v2_1.py, run_v2_2.py, run_v2_4.py (old/dev versions)
+  ✗ test_*.py (all test scripts)
+  ✗ diagnose_*.py (all diagnostic scripts)
+  ✗ check_*.py (all check scripts)
+  ✗ fix_*.py (all fix scripts except in batch files)
+  ✗ simple_*.py
+  ✗ read_*.py
+  ✗ create_*.py
+  ✗ update_*.py
+
+BATCH FILES (deployment/testing):
+  ✗ DEPLOY_*.bat (all deployment scripts)
+  ✗ BUILD_*.bat
+  ✗ TEST_*.bat
+  ✗ DEBUG_*.bat
+  ✗ DIAGNOSE_*.bat
+  ✗ CHECK_*.bat
+  ✗ INSTALL*.bat
+  ✗ Any other .bat except START_APP.bat, SETUP_NEW_USER.bat, FIX_PYWIN32_FOR_USER.bat
+
+FOLDERS:
+  ✗ archive/
+  ✗ samples/
+  ✗ sample csv/
+  ✗ tests/
+  ✗ document-manager-web/
+  ✗ TEAMS_DEPLOYMENT/
+  ✗ DESIGN FILES/ (if template is already in LABEL TEMPLATE/)
+  ✗ venv/ (if exists - virtual environment not needed)
+  ✗ __pycache__/ (Python cache - will regenerate)
+  ✗ python/ (portable Python if exists)
+
+SETTINGS FILES (old versions):
+  ✗ settings.json
+  ✗ settings_v2.json
+  ✗ settings_v2_2.json
+  ✗ settings_v2_4.json
+  ✗ settings_v2_3_network_example.json
+  ✗ settings_v2_3_onedrive_example.json
+  ✗ print_presets.json (if not used)
+
+OTHER:
+  ✗ .gitignore
+  ✗ *.backup* (all backup files)
+  ✗ *.log (log files - will regenerate)
+  ✗ *.pyc (compiled Python - will regenerate)
+
+================================================================================
+SUMMARY
+================================================================================
+
+KEEP (Minimal Production Installation):
+  - START_APP.bat
+  - run_v2_3.py
+  - settings_v2_3.json
+  - requirements.txt
+  - SETUP_NEW_USER.bat
+  - FIX_PYWIN32_FOR_USER.bat
+  - src/ folder (entire folder with all .py files)
+  - LABEL TEMPLATE/ folder (with .docx template)
+  - Database file(s)
+
+DELETE: Everything else (200+ files)
+
+Result: Clean production folder with only ~10 files + 2 folders
+
+================================================================================

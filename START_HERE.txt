@@ -1,0 +1,97 @@
+================================================================================
+TESTING THE PRINT SYSTEM - START HERE
+================================================================================
+
+STEP 0: CHECK PYTHON (30 seconds)
+----------------------------------
+Double-click: test_python.bat
+
+If it says Python works -> Continue to STEP 1
+If it says Python NOT FOUND -> See PYTHON_SETUP_HELP.md
+
+
+STEP 1: RUN DIAGNOSTICS (2 minutes)
+------------------------------------
+Double-click: run_diagnostics.bat
+
+This creates: print_diagnostic_report.txt
+SEND ME THIS FILE
+
+
+STEP 2: TEST THE APP (5 minutes)
+---------------------------------
+1. Run: python run_v2_3.py
+   (or: py run_v2_3.py)
+
+2. Open any day from calendar
+
+3. Click "⚙️ Manage Presets"
+
+4. Click "Standard Plot"
+
+5. Configure printers, click Save
+
+
+STEP 3: TRY PRINTING (5 minutes)
+---------------------------------
+1. Check 1-2 orders (checkboxes)
+
+2. Click "📋 Create Batch"
+
+3. Select your preset
+
+4. Click "Review & Print"
+
+
+IF ERRORS OCCUR:
+----------------
+SEND ME: print_errors.log (created automatically)
+
+
+FILES TO SEND ME:
+-----------------
+Always:
+  - print_diagnostic_report.txt
+
+If errors:
+  - print_errors.log
+
+If UI looks wrong:
+  - Screenshots
+
+
+DETAILED GUIDES:
+----------------
+- README_TESTING.md           <- Full testing guide
+- PYTHON_SETUP_HELP.md        <- Fix Python issues
+- PRINTING_GUIDE.md           <- How to use the system
+- TESTING_TOOLS_SUMMARY.md    <- What all the tools do
+
+
+QUICK FIXES:
+------------
+Problem: "python is not recognized"
+Fix: See PYTHON_SETUP_HELP.md
+
+Problem: Preset Manager is blank
+Fix: Click on a preset name in the left list
+
+Problem: No printers in dropdown
+Fix: Check if print spooler service is running
+
+Problem: Print jobs timing out
+Fix: This is normal for slow servers - logs will show details
+
+
+CONTACT:
+--------
+Send me any of these:
+  - print_diagnostic_report.txt
+  - print_errors.log
+  - Screenshots
+  - Description of what happened
+
+
+================================================================================
+That's it! Run test_python.bat first, then run_diagnostics.bat
+================================================================================

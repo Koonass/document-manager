@@ -1,0 +1,35 @@
+================================================================================
+ENHANCED ERROR LOGGING - READY FOR TESTING
+================================================================================
+
+I've updated the print system to capture MUCH more detailed information.
+
+WHAT CHANGED:
+-------------
+The error log will now show:
+
+1. Preset configuration being used (which printers, how many copies)
+2. Each order being processed (order number, PDF path, PDF exists?)
+3. Each printer being attempted (11x17, 24x36, folder label)
+4. Detailed errors when prints fail (exact error message, context)
+5. Full stack traces for exceptions
+
+NEXT STEPS:
+-----------
+1. Delete the old log file:
+   - Delete: print_errors.log
+
+2. Try printing again:
+   - Select 1-2 orders
+   - Click "Create Batch"
+   - Select "Standard Plot" preset
+   - Click "Review & Print"
+
+3. Send me the NEW print_errors.log
+
+This time it will show EXACTLY what's failing and why.
+
+IMPORTANT:
+----------
+Make sure to delete the old print_errors.log first so we only see
+the new detailed errors!

@@ -1,0 +1,313 @@
+================================================================================
+DEPLOYMENT CHECKLIST - What Each User Needs
+================================================================================
+
+For each user's computer, you need to deploy:
+
+================================================================================
+STEP 1: Install Python on User's Computer
+================================================================================
+
+Option A: User installs Python themselves
+------------------------------------------
+1. Go to: https://www.python.org/downloads/
+2. Download Python 3.8 or higher (recommend 3.12)
+3. Run installer
+4. Python will install to: C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312
+5. Note: Do NOT need to check "Add to PATH"
+
+
+Option B: IT installs Python centrally
+---------------------------------------
+Install Python to a common location for all users.
+
+
+================================================================================
+STEP 2: Copy Application Files to User's Computer
+================================================================================
+
+Copy the ENTIRE application folder to each user's computer:
+
+COPY THIS FOLDER:
+  C:\code\Document Manager\
+
+TO EACH USER'S COMPUTER:
+  C:\code\Document Manager\
+
+OR to a network/OneDrive location:
+  \\server\share\Document Manager\
+  OR
+  C:\Users\[USERNAME]\OneDrive\Apps\Document Manager\
+
+
+WHAT GETS COPIED:
+-----------------
+✓ run_v2_3.py                           (launcher)
+✓ requirements.txt                      (dependencies list)
+✓ src\                                  (all .py files - 12 modules)
+✓ LABEL TEMPLATE\                       (Word template folder)
+  └── Contract_Lumber_Label_Template.docx
+✓ INSTALL_FOR_JJANNEY.bat              (or create custom per user)
+✓ START_APP.bat                         (will be recreated by installer)
+
+
+DO NOT COPY (not needed on user computers):
+--------------------------------------------
+✗ venv\                                 (virtual environment)
+✗ __pycache__\                          (Python cache)
+✗ *.db files                            (database - each user gets own)
+✗ settings_v2_3.json                    (settings - each user configures)
+✗ *.log files                           (logs)
+✗ archive\                              (archive folder)
+✗ test_*.py                             (test files)
+✗ diagnose_*.py                         (diagnostic tools - optional)
+✗ All the *.md documentation files      (optional, but helpful)
+✗ Old version files (run_v2_1.py, etc.)
+
+
+================================================================================
+STEP 3: Install Python Packages on Each User's Computer
+================================================================================
+
+For each user, you need to:
+
+Option A: Create custom installer for each user
+------------------------------------------------
+1. On YOUR computer, run:
+   CREATE_CUSTOM_INSTALLER.bat
+
+2. Enter the user's Windows username (e.g., "jsmith")
+
+3. This creates: INSTALL_FOR_jsmith.bat
+
+4. Give that file to the user
+
+5. User double-clicks: INSTALL_FOR_jsmith.bat
+
+6. This installs all packages to THEIR Python
+
+
+Option B: Generic installer (may need manual path fix)
+-------------------------------------------------------
+1. User double-clicks: INSTALL.bat
+
+2. If it fails to find Python, edit the file and set their Python path
+
+
+Option C: Manual installation per user
+---------------------------------------
+On each user's computer, open Command Prompt:
+
+cd "C:\code\Document Manager"
+
+"C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\python.exe" -m pip install --user pandas PyPDF2 pywin32 lxml
+
+"C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\python.exe" -m pywin32_postinstall -install
+
+
+================================================================================
+STEP 4: Create START_APP.bat for Each User
+================================================================================
+
+After running the installer (Step 3), START_APP.bat is automatically created.
+
+OR manually create START_APP.bat with this content:
+
+@echo off
+echo Starting Document Manager V2.3...
+echo.
+"C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\python.exe" run_v2_3.py
+if errorlevel 1 pause
+
+Replace [USERNAME] with actual Windows username!
+
+
+================================================================================
+STEP 5: Configure Application on Each User's Computer
+================================================================================
+
+Each user needs to configure:
+
+1. Run START_APP.bat
+
+2. In application, click Settings
+
+3. Set paths:
+   - HTML/CSV Path: Where order files are located
+   - PDF Path: Where PDF files are stored
+   - Archive Path: Where to archive processed orders
+
+4. Save settings
+
+5. Click "Reload Data"
+
+
+================================================================================
+QUICK DEPLOYMENT SUMMARY
+================================================================================
+
+FOR EACH USER:
+
+1. ☐ Python installed on their computer
+     Location: C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312
+
+2. ☐ Application files copied
+     Location: C:\code\Document Manager\ (or network location)
+
+3. ☐ Packages installed to their Python
+     Method: Run INSTALL_FOR_[USERNAME].bat
+
+4. ☐ START_APP.bat created
+     Created automatically by installer
+
+5. ☐ Application configured
+     User sets paths in application settings
+
+6. ☐ Printer configured (if using folder labels)
+     User selects printer in Print Settings
+
+
+================================================================================
+NETWORK/SHARED DEPLOYMENT OPTION
+================================================================================
+
+If you want ALL users to share the same application files:
+
+OPTION: Network or OneDrive Deployment
+---------------------------------------
+
+1. Put application files in ONE central location:
+   \\SERVER\Share\Apps\Document Manager\
+   OR
+   OneDrive\Business\Apps\Document Manager\
+
+2. Each user still needs:
+   - Python installed locally
+   - Packages installed locally (run installer)
+   - START_APP.bat pointing to network location
+
+3. Each user's START_APP.bat:
+   @echo off
+   cd /d "\\SERVER\Share\Apps\Document Manager"
+   "C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python312\python.exe" run_v2_3.py
+   pause
+
+4. Database can be shared or local per user
+
+
+================================================================================
+AUTOMATED DEPLOYMENT OPTION
+================================================================================
+
+For IT departments:
+
+1. Use CREATE_DISTRIBUTION_PACKAGE.bat to create clean package
+
+2. Create deployment script that:
+   - Installs Python (if not present)
+   - Copies application files
+   - Runs pip install with correct Python path
+   - Creates START_APP.bat with correct paths
+
+3. Deploy via:
+   - Group Policy
+   - SCCM
+   - Manual installation
+   - Network share
+
+
+================================================================================
+TESTING DEPLOYMENT
+================================================================================
+
+After deploying to a user's computer, verify:
+
+☐ User can double-click START_APP.bat
+☐ Application launches without errors
+☐ User can configure file paths
+☐ User can load data (Reload Data button)
+☐ User can view orders in calendar
+☐ User can print (if printer configured)
+☐ Check log file for errors: document_manager_v2.3.log
+
+
+================================================================================
+TROUBLESHOOTING DEPLOYMENT
+================================================================================
+
+User says: "Missing dependencies"
+---------------------------------
+Solution: Run INSTALL_FOR_[USERNAME].bat again
+Packages weren't installed to the correct Python
+
+
+User says: "Python not found"
+------------------------------
+Solution: Edit START_APP.bat with full path to their Python
+Check: C:\Users\[USERNAME]\AppData\Local\Programs\Python\
+
+
+User says: "Application won't start"
+-------------------------------------
+Solution: Check document_manager_v2.3.log for errors
+Common issues:
+- Missing files (didn't copy everything)
+- Wrong Python path in START_APP.bat
+- Packages not installed
+
+
+Label printing doesn't work
+----------------------------
+Solution:
+- Verify template exists: LABEL TEMPLATE\Contract_Lumber_Label_Template.docx
+- Check template has bookmarks: Customer, JobReference, DeliveryArea, OrderNumber
+- User must configure printer in Print Settings
+
+
+================================================================================
+MINIMUM FILES NEEDED (Essential Only)
+================================================================================
+
+If you want absolute minimum:
+
+Root folder:
+  run_v2_3.py
+  requirements.txt
+  START_APP.bat (created by installer)
+
+src\ folder (12 files):
+  main_v2_3.py
+  pdf_processor.py
+  enhanced_database_v2.py
+  relationship_manager.py
+  statistics_calendar_widget.py
+  enhanced_expanded_view.py
+  enhanced_search_view.py
+  archive_manager.py
+  word_template_processor.py
+  error_logger.py
+  __init__.py
+  verify_template.py (optional)
+
+LABEL TEMPLATE\ folder:
+  Contract_Lumber_Label_Template.docx
+
+Total: 14-15 files minimum
+
+
+================================================================================
+RECOMMENDED FILES TO INCLUDE
+================================================================================
+
+Include these for better support:
+
+  INSTALL_FOR_[USERNAME].bat  (custom installer per user)
+  NO_ADMIN_INSTALL_GUIDE.txt  (instructions)
+  diagnose_label_printing.py  (troubleshooting)
+  LIST_ALL_PRINTERS.bat       (printer diagnostic)
+  QUICK_FIX_DEPENDENCIES.txt  (help guide)
+
+This makes troubleshooting much easier!
+
+
+================================================================================

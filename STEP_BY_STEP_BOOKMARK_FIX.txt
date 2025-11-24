@@ -1,0 +1,252 @@
+================================================================================
+STEP-BY-STEP: FIX "BOOKMARK NOT FOUND" ERROR
+================================================================================
+
+ERROR MESSAGE: "bookmark not found in template"
+
+CAUSE: Your Word template is missing the required bookmarks
+
+FIX TIME: 5 minutes
+
+================================================================================
+STEP 1: Check what bookmarks you have now
+================================================================================
+
+Double-click this file:
+  CHECK_BOOKMARKS.bat
+
+This will show you:
+- How many bookmarks are in your template
+- Which ones are present
+- Which ones are missing
+
+
+================================================================================
+STEP 2: Open the template in Microsoft Word
+================================================================================
+
+Navigate to this folder:
+  C:\code\Document Manager\LABEL TEMPLATE\
+
+Double-click to open:
+  Contract_Lumber_Label_Template.docx
+
+Microsoft Word should open with your template.
+
+
+================================================================================
+STEP 3: Enable bookmark visibility (makes it easier)
+================================================================================
+
+In Word:
+  File → Options → Advanced
+
+Scroll down to "Show document content"
+
+Check the box: ☑ Show bookmarks
+
+Click OK
+
+Now you'll see bookmarks with gray [ ] brackets around them.
+
+
+================================================================================
+STEP 4: Add the required bookmarks
+================================================================================
+
+You need to add 4 bookmarks. For EACH bookmark:
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ BOOKMARK 1: builder                                                  │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Find where CUSTOMER NAME should appear
+   (Look for text like "Customer:" or "Builder:" or placeholder text)
+
+2. SELECT the text where the customer name will go
+   (e.g., select "CUSTOMER NAME HERE" or similar)
+
+3. Click INSERT tab (at top of Word)
+
+4. Click "Bookmark" button
+
+5. In the popup, type EXACTLY:  builder
+
+6. Click "Add" button
+
+7. The text should now have gray [ ] brackets around it
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ BOOKMARK 2: Lot / subdivision                                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Find where LOT/JOB REFERENCE should appear
+   (Look for "Lot:", "Job:", "Subdivision:" or placeholder)
+
+2. SELECT the text where lot/job info will go
+
+3. INSERT tab → Bookmark
+
+4. Type EXACTLY:  Lot / subdivision
+   (Include the space and forward slash!)
+
+5. Click "Add"
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ BOOKMARK 3: floors                                                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Find where DELIVERY AREA should appear
+   (Look for "Location:", "Delivery:", "Floor:" or placeholder)
+
+2. SELECT the text where delivery area will go
+
+3. INSERT tab → Bookmark
+
+4. Type EXACTLY:  floors
+
+5. Click "Add"
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│ BOOKMARK 4: designer                                                 │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Find where DESIGNER NAME should appear
+   (Look for "Designer:", "Rep:" or placeholder)
+
+2. SELECT the text where designer name will go
+
+3. INSERT tab → Bookmark
+
+4. Type EXACTLY:  designer
+
+5. Click "Add"
+
+
+================================================================================
+STEP 5: Save the template
+================================================================================
+
+In Word:
+  File → Save
+  (or press Ctrl+S)
+
+Close Microsoft Word
+
+
+================================================================================
+STEP 6: Verify the bookmarks
+================================================================================
+
+Double-click again:
+  CHECK_BOOKMARKS.bat
+
+You should now see:
+  ✓ builder
+  ✓ Lot / subdivision
+  ✓ floors
+  ✓ designer
+
+
+================================================================================
+STEP 7: Test folder printing
+================================================================================
+
+1. Open the Document Manager application
+2. Select ONE order to test
+3. Enable "Folder Printer" in Print Settings
+4. Click "Print All"
+5. Check if label prints correctly
+
+
+================================================================================
+OPTIONAL: Add extra bookmarks
+================================================================================
+
+If you want order number and print date on labels:
+
+
+BOOKMARK 5: OrderNumber (optional)
+-----------------------------------
+1. Find where ORDER NUMBER should appear
+2. SELECT the text
+3. INSERT → Bookmark → Type: OrderNumber → Add
+
+
+BOOKMARK 6: DatePrinted (optional)
+-----------------------------------
+1. Find where PRINT DATE should appear
+2. SELECT the text
+3. INSERT → Bookmark → Type: DatePrinted → Add
+4. This will auto-fill with current date/time when printing
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Q: I don't see the INSERT tab in Word
+A: Make sure you have Microsoft Word (not WordPad or Notepad)
+
+
+Q: The Bookmark button is grayed out
+A: Make sure you have text SELECTED first
+
+
+Q: I added a bookmark but it disappeared
+A: When you type in a bookmarked area, the bookmark gets deleted.
+   You need to re-add it. Try not to edit the bookmarked text.
+
+
+Q: I made a mistake with the bookmark name
+A: INSERT → Bookmark → Select the wrong bookmark → Delete
+   Then add it again with the correct name
+
+
+Q: Still getting "bookmark not found"
+A: Run CHECK_BOOKMARKS.bat to see what's wrong
+   The bookmark names must match EXACTLY (case-sensitive)
+
+
+================================================================================
+VISUAL EXAMPLE
+================================================================================
+
+Your template might look like this BEFORE:
+
+  ┌──────────────────────────────┐
+  │  Customer: _______________   │
+  │  Lot/Job: _______________    │
+  │  Location: ______________    │
+  │  Designer: ______________    │
+  └──────────────────────────────┘
+
+After adding bookmarks (with "Show bookmarks" on):
+
+  ┌──────────────────────────────┐
+  │  Customer: [builder]         │
+  │  Lot/Job: [Lot / subdivision]│
+  │  Location: [floors]          │
+  │  Designer: [designer]        │
+  └──────────────────────────────┘
+
+The text in [ ] brackets will be replaced with actual order data when printing!
+
+
+================================================================================
+NEED HELP?
+================================================================================
+
+Run these tools:
+
+  CHECK_BOOKMARKS.bat          - See current bookmark status
+  ADD_BOOKMARKS_GUIDE.txt      - Detailed instructions
+  diagnose_label_printing.py   - Full diagnostic
+
+Or check the log file:
+  document_manager_v2.3.log
+
+================================================================================

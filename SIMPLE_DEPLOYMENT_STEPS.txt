@@ -1,0 +1,245 @@
+================================================================================
+SIMPLE DEPLOYMENT - Step by Step for Each User
+================================================================================
+
+WHAT EACH USER'S COMPUTER NEEDS:
+
+1. Python installed
+2. Application files (all files, not just START_APP.bat)
+3. Python packages installed
+4. START_APP.bat configured
+
+================================================================================
+
+STEP-BY-STEP FOR EACH USER:
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 1: Copy Application to User's Computer                               │
+└────────────────────────────────────────────────────────────────────────────┘
+
+Copy the ENTIRE "Document Manager" folder to:
+  C:\code\Document Manager\
+
+This includes:
+  - run_v2_3.py
+  - src\ folder (all Python files)
+  - LABEL TEMPLATE\ folder (Word template)
+  - INSTALL_FOR_JJANNEY.bat (or create custom for each user)
+  - requirements.txt
+  - All other files
+
+DON'T just copy START_APP.bat - that won't work alone!
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 2: Verify Python is Installed                                        │
+└────────────────────────────────────────────────────────────────────────────┘
+
+Check if Python exists at:
+  C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\python.exe
+
+If NOT installed:
+  - Download from https://www.python.org/downloads/
+  - Install (don't need to add to PATH)
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 3: Create Custom Installer for User                                  │
+└────────────────────────────────────────────────────────────────────────────┘
+
+Option A: Use CREATE_CUSTOM_INSTALLER.bat
+------------------------------------------
+1. On YOUR computer, run: CREATE_CUSTOM_INSTALLER.bat
+2. Enter user's Windows username (e.g., "msmith")
+3. Enter Python version (default: 312)
+4. This creates: INSTALL_FOR_msmith.bat
+5. Copy that file to user's Document Manager folder
+
+
+Option B: Edit INSTALL_FOR_JJANNEY.bat
+---------------------------------------
+1. Copy INSTALL_FOR_JJANNEY.bat
+2. Rename to INSTALL_FOR_[USERNAME].bat
+3. Edit the file
+4. Change: C:\Users\jjanney\... to C:\Users\[USERNAME]\...
+5. Save
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 4: User Runs Installer                                               │
+└────────────────────────────────────────────────────────────────────────────┘
+
+User double-clicks:
+  INSTALL_FOR_[USERNAME].bat
+
+This will:
+  - Install pandas, PyPDF2, pywin32, lxml
+  - Configure pywin32
+  - Create START_APP.bat
+  - Verify installation
+
+Wait for "Installation Complete!" message
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 5: User Launches Application                                         │
+└────────────────────────────────────────────────────────────────────────────┘
+
+User double-clicks:
+  START_APP.bat
+
+Application should launch!
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 6: User Configures Settings                                          │
+└────────────────────────────────────────────────────────────────────────────┘
+
+In the application:
+
+1. Click "Settings" button
+
+2. Set paths:
+   - HTML Path: Where order HTML files are
+   - PDF Path: Where PDF files are stored
+   - Archive Path: Where to save processed orders
+
+3. Click "Save"
+
+4. Click "Reload Data"
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ STEP 7: Configure Printer (Optional - for folder labels)                  │
+└────────────────────────────────────────────────────────────────────────────┘
+
+If user needs folder label printing:
+
+1. In Print Settings section
+2. Check "Folder Printer" checkbox
+3. Select printer from dropdown
+4. Test print one label
+
+
+================================================================================
+QUICK CHECKLIST FOR EACH USER
+================================================================================
+
+For user: _________________ (name)
+
+☐ Step 1: Copied entire Document Manager folder to C:\code\Document Manager\
+
+☐ Step 2: Verified Python installed at:
+          C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\
+
+☐ Step 3: Created custom installer: INSTALL_FOR_[USERNAME].bat
+
+☐ Step 4: User ran installer successfully
+          (saw "Installation Complete!" message)
+
+☐ Step 5: User can launch app via START_APP.bat
+
+☐ Step 6: User configured file paths in Settings
+
+☐ Step 7: User can see orders in calendar
+
+☐ Step 8: (Optional) User configured printer for labels
+
+
+Deployed by: _____________ Date: _____________
+Tested by: _____________ Date: _____________
+
+
+================================================================================
+WHAT EACH USER GETS
+================================================================================
+
+After deployment, each user will have:
+
+On their computer:
+  C:\code\Document Manager\
+    ├── run_v2_3.py
+    ├── START_APP.bat (customized for them)
+    ├── src\ (all Python modules)
+    ├── LABEL TEMPLATE\ (Word template)
+    ├── settings_v2_3.json (created on first run)
+    ├── document_manager_v2.3.log (log file)
+    └── archive\ (created automatically)
+
+In their Python installation:
+  C:\Users\[USERNAME]\AppData\Local\Programs\Python\Python312\
+    └── (pandas, PyPDF2, pywin32, lxml packages)
+
+
+================================================================================
+COMMON MISTAKES TO AVOID
+================================================================================
+
+❌ DON'T just copy START_APP.bat
+   → Need entire application folder!
+
+❌ DON'T use same START_APP.bat for all users
+   → Each user needs their own with their username!
+
+❌ DON'T forget to install packages
+   → Must run INSTALL_FOR_[USERNAME].bat on each computer!
+
+❌ DON'T skip Python installation
+   → Each computer needs Python installed!
+
+❌ DON'T forget the template file
+   → LABEL TEMPLATE folder must be copied!
+
+
+================================================================================
+NETWORK DEPLOYMENT ALTERNATIVE
+================================================================================
+
+If you want to avoid copying files to each computer:
+
+1. Put application in ONE network location:
+   \\SERVER\Share\DocumentManager\
+
+2. Each user still needs:
+   - Python installed locally
+   - Packages installed locally (run installer on their computer)
+
+3. Each user's START_APP.bat points to network:
+   @echo off
+   cd /d "\\SERVER\Share\DocumentManager"
+   "C:\Users\%USERNAME%\AppData\Local\Programs\Python\Python312\python.exe" run_v2_3.py
+   pause
+
+4. Advantage: Update once, all users get updates
+5. Disadvantage: Requires network access to run
+
+
+================================================================================
+TESTING YOUR DEPLOYMENT
+================================================================================
+
+Before deploying to all users, test with ONE user:
+
+1. Pick a test user
+2. Follow all steps above
+3. Verify everything works
+4. Document any issues
+5. Adjust process if needed
+6. Then deploy to remaining users
+
+
+================================================================================
+NEED HELP?
+================================================================================
+
+See these files:
+  DEPLOYMENT_CHECKLIST_FOR_USERS.txt (detailed version)
+  NO_ADMIN_INSTALL_GUIDE.txt (if no admin rights)
+  INSTALLATION_INSTRUCTIONS.md (full install guide)
+
+For troubleshooting:
+  QUICK_FIX_DEPENDENCIES.txt
+  CHECK_BOOKMARKS.bat
+  LIST_ALL_PRINTERS.bat
+
+================================================================================

@@ -1,0 +1,170 @@
+================================================================================
+FOLDER LABEL PRINTING - TROUBLESHOOTING INSTRUCTIONS FOR REMOTE USER
+================================================================================
+
+Hello! Your support technician has identified potential issues with folder
+label printing. Please follow these steps to diagnose and fix the problem.
+
+================================================================================
+STEP 1: RUN THE DIAGNOSTIC
+================================================================================
+
+1. Find this folder on your computer:
+   C:\code\Document Manager
+   (or wherever Document Manager is installed)
+
+2. Double-click this file:
+   DIAGNOSE_LABEL_PRINTING.bat
+
+   (If that doesn't work, try: DIAGNOSE_LABEL_PRINTING.ps1)
+
+3. Wait for it to finish (30-60 seconds)
+
+4. A file called "diagnostic_report.txt" will be created
+
+5. Send diagnostic_report.txt to your support technician
+
+⏸️  STOP HERE AND WAIT FOR FURTHER INSTRUCTIONS
+
+================================================================================
+STEP 2: APPLY THE FIX (If instructed by support)
+================================================================================
+
+Your support technician will review your diagnostic report and tell you which
+fix to apply. DO NOT proceed with any fix until instructed.
+
+--------------------------------------------------------------------------------
+Option A: Fix the Code (Most Common)
+--------------------------------------------------------------------------------
+
+If your technician says: "Apply the bookmark fix"
+
+1. Close the Document Manager application (if running)
+
+2. Double-click: FIX_BOOKMARK_MISMATCH.py
+   (or run: python FIX_BOOKMARK_MISMATCH.py)
+
+3. Type "yes" when prompted
+
+4. Wait for the fix to complete
+
+5. You should see: "✓ FIX APPLIED SUCCESSFULLY!"
+
+6. Go to STEP 3 (Verify the Fix)
+
+--------------------------------------------------------------------------------
+Option B: Configure the Printer
+--------------------------------------------------------------------------------
+
+If your technician says: "Configure the printer"
+
+1. Open the Document Manager application
+
+2. Click on any date in the calendar to see orders
+
+3. Scroll down to "Print Settings"
+
+4. Check the box: ☑ Folder Printer
+
+5. Click the dropdown menu next to "Folder Printer"
+
+6. Select your printer from the list
+
+7. The setting saves automatically
+
+8. Go to STEP 3 (Test Print)
+
+--------------------------------------------------------------------------------
+Option C: Update the Template
+--------------------------------------------------------------------------------
+
+If your technician says: "Update the template"
+
+Your technician will send you an updated template file or detailed instructions.
+Wait for those instructions before proceeding.
+
+================================================================================
+STEP 3: VERIFY THE FIX
+================================================================================
+
+After applying a fix:
+
+1. Run DIAGNOSE_LABEL_PRINTING.bat again
+
+2. Send the new diagnostic_report.txt to your technician
+
+3. If cleared by your technician, proceed to test printing
+
+================================================================================
+STEP 4: TEST PRINT A LABEL
+================================================================================
+
+Once your technician confirms the fix:
+
+1. Open Document Manager
+
+2. Click on a date with orders
+
+3. Check the box for ONE order (just to test)
+
+4. In Print Settings:
+   ☑ Folder Printer (enabled)
+   ☐ 11x17 Printer (disabled for testing)
+   ☐ 24x36 Printer (disabled for testing)
+
+5. Click "Print All"
+
+6. Check if the label printed correctly
+
+7. Report results to your technician
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Q: The diagnostic script won't run
+A: Make sure Python is installed. Try running from the portable Python setup
+   if available.
+
+Q: Nothing happens when I double-click the .bat file
+A: Try right-click → "Run as Administrator"
+
+Q: I see an error about "win32com"
+A: Tell your technician. They may need to install a Python package.
+
+Q: The label printed but it's blank
+A: This is the bookmark mismatch issue. Tell your technician to apply the
+   bookmark fix (Option A).
+
+Q: The label didn't print at all
+A: Check if the printer is:
+   - Turned on
+   - Connected to your computer
+   - Selected in the Print Settings
+   Report to your technician.
+
+================================================================================
+IMPORTANT FILES
+================================================================================
+
+DO NOT DELETE these files:
+
+• diagnostic_report.txt - The diagnostic results
+• word_template_processor.py.backup_[timestamp] - Backup of code (if fix applied)
+• document_manager_v2.3.log - Application log file
+
+Your technician may ask for these files.
+
+================================================================================
+NEED HELP?
+================================================================================
+
+Contact your support technician with:
+1. Your diagnostic_report.txt file
+2. A description of what happened
+3. Any error messages you see
+4. The last 20 lines of: document_manager_v2.3.log
+
+================================================================================
+END OF INSTRUCTIONS
+================================================================================
