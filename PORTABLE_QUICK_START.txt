@@ -1,0 +1,149 @@
+================================================================================
+     DOCUMENT MANAGER V2.4 - PORTABLE EDITION
+     Quick Start Guide
+================================================================================
+
+CONGRATULATIONS! You have the portable version - no installation needed!
+
+================================================================================
+  STEP 1: COPY THE FOLDER
+================================================================================
+
+Copy this entire folder to one of these locations:
+
+  [RECOMMENDED] USB Drive:
+  E:\DocumentManager\  (or F:\, G:\, etc. - your USB drive letter)
+
+  OneDrive:
+  C:\Users\YourName\OneDrive\Apps\DocumentManager\
+
+  Local Drive:
+  C:\Apps\DocumentManager\
+
+  Network Share:
+  \\server\share\DocumentManager\
+
+IMPORTANT: Copy the ENTIRE folder, not just some files!
+
+================================================================================
+  STEP 2: RUN THE APPLICATION
+================================================================================
+
+Double-click:  START_PORTABLE.bat
+
+That's it! The application will start immediately.
+
+(First time only: It will ask to create settings and folders - say Yes)
+
+================================================================================
+  DAILY USE
+================================================================================
+
+Just double-click:  START_PORTABLE.bat
+
+The application remembers everything from last time.
+
+================================================================================
+  WHAT'S INCLUDED
+================================================================================
+
+This portable package contains EVERYTHING you need:
+
+  [x] Python 3.11.9 (programming language)
+  [x] PyQt5 (graphical interface)
+  [x] pywin32 (Microsoft Word integration)
+  [x] Document Manager application
+  [x] All documentation
+
+Total size: ~350-400 MB
+
+NO INSTALLATION REQUIRED!
+NO ADMIN RIGHTS NEEDED!
+WORKS ON ANY WINDOWS PC!
+
+================================================================================
+  COMMON QUESTIONS
+================================================================================
+
+Q: Do I need to install Python?
+A: NO! Python is included in the python\ folder.
+
+Q: Do I need admin rights?
+A: NO! Runs as regular user.
+
+Q: Can I move it to a different location?
+A: YES! Just copy the entire folder anywhere.
+
+Q: Can I use this on multiple computers?
+A: YES! Copy to OneDrive or USB and use everywhere.
+
+Q: Will this interfere with other Python programs?
+A: NO! Completely isolated and self-contained.
+
+Q: How do I update to a newer version?
+A: Your IT/admin will provide an updated folder - just replace the old one.
+   KEEP YOUR DATA FOLDER! It contains your database.
+
+================================================================================
+  TROUBLESHOOTING
+================================================================================
+
+Problem: "Portable Python not found!"
+Solution:
+  - Make sure you copied the ENTIRE folder (including python\ subfolder)
+  - If on OneDrive, wait for sync to complete (green checkmark)
+  - Check folder size: should be ~350-400 MB
+
+Problem: Application won't start
+Solution:
+  - Check antivirus didn't block it
+  - Try copying to C:\Apps\ instead
+  - See PORTABLE_DEPLOYMENT_GUIDE.md for detailed help
+
+Problem: Database locked
+Solution:
+  - Close other instances of the app
+  - If on network/OneDrive, only 2-3 users can run simultaneously
+  - Close the app when not using it
+
+================================================================================
+  FOLDER STRUCTURE
+================================================================================
+
+After first run, you'll see:
+
+DocumentManager\
+├── python\                     (Portable Python - don't touch!)
+├── src\                        (Application code)
+├── LABEL TEMPLATE\             (Word template for labels)
+├── DATA\                       (YOUR DATA - created on first run)
+│   ├── document_manager_v2.1.db   (Your database)
+│   ├── BisTrack Exports\          (Put HTML files here)
+│   ├── PDFs\                      (Generated labels)
+│   └── Archive\                   (Archived records)
+├── settings_v2_4.json          (Your settings - created on first run)
+├── START_PORTABLE.bat          (CLICK THIS TO RUN!)
+└── [documentation files]
+
+BACKUP YOUR DATA FOLDER REGULARLY!
+
+================================================================================
+  HELP & SUPPORT
+================================================================================
+
+For detailed help, see these files:
+
+  PORTABLE_DEPLOYMENT_GUIDE.md  - Complete deployment guide
+  DEPLOYMENT_README.md           - General deployment information
+  README.md                      - Application overview
+  TROUBLESHOOTING.md             - Common issues and solutions
+
+================================================================================
+  ENJOY DOCUMENT MANAGER!
+================================================================================
+
+You're all set! Just run START_PORTABLE.bat whenever you need the application.
+
+Questions? Check the documentation files or contact your IT support.
+
+================================================================================
