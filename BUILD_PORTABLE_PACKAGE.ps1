@@ -151,15 +151,18 @@ if (Test-Path ".\LABEL TEMPLATE") {
 # Copy essential files
 $filesToCopy = @(
     "run_v2_4.py",
+    "run_v2_4_readonly.py",
     "setup_new_deployment.py",
     "settings_v2_4_template.json",
     "requirements.txt",
     "START_PORTABLE.bat",
+    "START_PORTABLE_READONLY.bat",
     "SETUP_FOR_NEW_USER.bat",
     "README.md",
     "DEPLOYMENT_README.md",
     "PORTABLE_DEPLOYMENT_GUIDE.md",
-    "PORTABLE_QUICK_START.txt"
+    "PORTABLE_QUICK_START.txt",
+    "READONLY_USB_GUIDE.txt"
 )
 
 foreach ($file in $filesToCopy) {

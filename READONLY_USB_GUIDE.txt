@@ -1,0 +1,291 @@
+================================================================================
+     DOCUMENT MANAGER V2.4 - READ-ONLY USB DEPLOYMENT
+     For USB Drives Where Users Cannot Write Files
+================================================================================
+
+PROBLEM SOLVED!
+
+Many organizations have USB drives configured as READ-ONLY for security.
+Users can copy files FROM the USB but cannot write TO the USB.
+
+This would normally break the application since the database needs to be saved.
+
+SOLUTION: Hybrid deployment!
+  - Application runs from USB (read-only)
+  - Data saves to your computer (writable)
+
+================================================================================
+  HOW IT WORKS
+================================================================================
+
+When you run from a read-only USB:
+
+1. Application code stays on USB
+   - Python interpreter
+   - Source code
+   - Word template
+   - Documentation
+
+2. Your data is stored locally on the computer
+   - Database: C:\Users\YourName\AppData\Roaming\DocumentManager\
+   - Settings: Saved in same location
+   - HTML exports: Your computer
+   - Generated PDFs: Your computer
+
+BENEFITS:
+  [x] Application is portable on USB
+  [x] Data is writable on local computer
+  [x] Works with read-only USB drives
+  [x] Each computer has its own database
+  [x] USB can be shared between users
+
+================================================================================
+  STEP 1: PREPARE USB DRIVE
+================================================================================
+
+Copy the complete portable package to your USB drive:
+
+  E:\DocumentManager\             (Your USB drive letter may vary)
+  ├── python\                     (Portable Python)
+  ├── src\                        (Application code)
+  ├── LABEL TEMPLATE\             (Word template)
+  ├── START_PORTABLE_READONLY.bat (Use this launcher!)
+  ├── START_PORTABLE.bat          (Normal launcher)
+  └── [other files]
+
+SIZE: ~350-400 MB total
+
+================================================================================
+  STEP 2: RUN FROM USB (READ-ONLY MODE)
+================================================================================
+
+On any Windows computer:
+
+1. Plug in USB drive
+2. Navigate to E:\DocumentManager\  (or your USB drive letter)
+3. Double-click: START_PORTABLE_READONLY.bat
+
+The script will:
+  - Detect USB is read-only
+  - Create data folder on your computer
+  - Show you where your data is stored
+  - Launch the application
+
+FIRST TIME, YOU'LL SEE:
+
+  [NOTICE] Location is READ-ONLY (USB drive?)
+  [INFO] Data will be stored in: C:\Users\YourName\AppData\Roaming\DocumentManager
+
+  Creating data folder structure...
+  [OK] Created: C:\Users\YourName\AppData\Roaming\DocumentManager
+  [OK] Created: BisTrack Exports folder
+  [OK] Created: PDFs folder
+  [OK] Created: Archive folder
+
+================================================================================
+  STEP 3: USING THE APPLICATION
+================================================================================
+
+YOUR DATA LOCATION:
+  C:\Users\YourName\AppData\Roaming\DocumentManager\DATA\
+
+To access your data folder quickly:
+  1. Press Win + R
+  2. Type: %APPDATA%\DocumentManager
+  3. Press Enter
+
+YOUR WORKFLOW:
+
+1. Place HTML exports here:
+   %APPDATA%\DocumentManager\DATA\BisTrack Exports\
+
+2. Run application from USB:
+   E:\DocumentManager\START_PORTABLE_READONLY.bat
+
+3. Generated PDFs will be at:
+   %APPDATA%\DocumentManager\DATA\PDFs\
+
+4. Database is automatically saved:
+   %APPDATA%\DocumentManager\DATA\document_manager_v2.1.db
+
+================================================================================
+  USING ON MULTIPLE COMPUTERS
+================================================================================
+
+SCENARIO: You want to use the USB on both work and home computer
+
+OPTION A: Independent Databases (Recommended)
+  - Plug USB into work computer → has work database
+  - Plug USB into home computer → has home database
+  - Each computer maintains separate data
+  - Application code is the same (from USB)
+
+OPTION B: Shared Database via Network/OneDrive
+  - Set data location to network share:
+    Set DM_DATA_PATH=\\server\share\DocumentManager\DATA
+  - Or use OneDrive:
+    Set DM_DATA_PATH=%OneDrive%\Apps\DocumentManager\DATA
+  - Both computers access same database
+  - Requires network connection
+
+================================================================================
+  SHARING USB WITH TEAM
+================================================================================
+
+If multiple people use the SAME USB:
+
+WHAT HAPPENS:
+  - Each person has their own database on their computer
+  - Application code is shared from USB
+  - Everyone runs the same version
+  - No data conflicts
+
+UPDATES:
+  - IT updates the USB with new application code
+  - Users' data remains on their computers (unaffected)
+  - Next time they run, they get the updated version
+
+================================================================================
+  TROUBLESHOOTING
+================================================================================
+
+Problem: "Portable Python not found!"
+Solution:
+  - Ensure entire folder copied to USB (including python\ subfolder)
+  - Check USB has ~350-400 MB of files
+  - Verify python\python.exe exists
+
+Problem: "Permission denied" when saving
+Solution:
+  - This shouldn't happen! Data is on your computer, not USB
+  - Check antivirus isn't blocking %APPDATA%
+  - Try running as different user
+
+Problem: Can't find my database/files
+Solution:
+  - Press Win + R
+  - Type: %APPDATA%\DocumentManager
+  - Press Enter
+  - Your DATA folder is there
+
+Problem: Want to move data to different location
+Solution:
+  - Close application
+  - Copy %APPDATA%\DocumentManager to new location
+  - Set environment variable before running:
+    set DM_DATA_PATH=C:\MyDocuments\DocumentManager\DATA
+    START_PORTABLE_READONLY.bat
+
+Problem: Database is too large, takes up space
+Solution:
+  - Archive old records from within application
+  - Move %APPDATA%\DocumentManager to external drive
+  - Set DM_DATA_PATH to point to new location
+
+================================================================================
+  TECHNICAL DETAILS
+================================================================================
+
+How Read-Only Detection Works:
+  1. START_PORTABLE_READONLY.bat tries to create a test file
+  2. If test file creation fails → READ-ONLY mode activated
+  3. Sets environment variables:
+     - DM_READONLY_MODE=1
+     - DM_DATA_PATH=C:\Users\...\AppData\Roaming\DocumentManager\DATA
+     - DM_SETTINGS_PATH=C:\Users\...\AppData\Roaming\DocumentManager\settings_v2_4.json
+  4. Launches run_v2_4_readonly.py instead of run_v2_4.py
+  5. Python script redirects all file operations to local paths
+
+Environment Variables You Can Set:
+  DM_DATA_PATH       - Override data storage location
+  DM_SETTINGS_PATH   - Override settings file location
+  DM_READONLY_MODE   - Force read-only mode (1=on, 0=off)
+
+Example Custom Configuration:
+  @echo off
+  set DM_DATA_PATH=D:\DocumentManager\DATA
+  set DM_SETTINGS_PATH=D:\DocumentManager\settings_v2_4.json
+  E:\DocumentManager\START_PORTABLE_READONLY.bat
+
+================================================================================
+  COMPARISON: NORMAL VS READ-ONLY MODE
+================================================================================
+
+NORMAL MODE (START_PORTABLE.bat):
+  - Everything stored in application folder
+  - Requires writable location (local drive, OneDrive, network)
+  - Shared database if multiple users access same folder
+  - Best for: Team collaboration, OneDrive deployment
+
+READ-ONLY MODE (START_PORTABLE_READONLY.bat):
+  - Application on USB (read-only)
+  - Data on local computer (writable)
+  - Each computer has separate database
+  - Best for: Personal use, read-only USB, multiple computers
+
+================================================================================
+  BACKING UP YOUR DATA
+================================================================================
+
+Your database and files are at:
+  %APPDATA%\DocumentManager\
+
+TO BACKUP:
+  1. Close application
+  2. Press Win + R, type: %APPDATA%
+  3. Copy the "DocumentManager" folder to backup location
+  4. Recommended: Weekly backups to OneDrive or network share
+
+TO RESTORE:
+  1. Close application
+  2. Copy backup folder back to %APPDATA%\DocumentManager
+  3. Run application - your data is restored
+
+================================================================================
+  FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+Q: Will this work if I don't have admin rights?
+A: YES! Everything runs in user space, no admin needed.
+
+Q: How do I update to a new version?
+A: Replace files on USB. Your data (on computer) stays intact.
+
+Q: Can I run this from CD/DVD?
+A: YES! CD/DVD is also read-only, so use START_PORTABLE_READONLY.bat
+
+Q: What if USB drive letter changes?
+A: No problem! Script auto-detects location using %~dp0
+
+Q: Can I use regular START_PORTABLE.bat if USB is writable?
+A: YES! Use whichever launcher matches your USB permissions.
+
+Q: How do I know if my USB is read-only?
+A: Try creating a text file on the USB. If you can't, it's read-only.
+
+Q: Where exactly is %APPDATA%?
+A: Typically: C:\Users\YourName\AppData\Roaming\
+
+Q: Is my data safe?
+A: Yes! Same security as any file in your user folder.
+
+Q: Can viruses from USB affect my data?
+A: Your data is separate. USB only contains application code (plain text Python).
+
+================================================================================
+  SUPPORT
+================================================================================
+
+For more help:
+  - PORTABLE_DEPLOYMENT_GUIDE.md - Complete deployment guide
+  - DEPLOYMENT_README.md - General deployment help
+  - README.md - Application overview
+
+Questions about read-only mode?
+  - Check this guide's Troubleshooting section
+  - Verify environment variables are set correctly
+  - Test write permissions on your computer's AppData folder
+
+================================================================================
+     ENJOY PORTABLE DOCUMENT MANAGER FROM YOUR USB DRIVE!
+================================================================================
