@@ -28,17 +28,22 @@ set "PYTHON_EXE="
 if exist "%APP_DIR%python\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python\python.exe"
     set "PYTHON_LOCATION=python\"
+    goto :found_python
 )
 
 if exist "%APP_DIR%python-embedded\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python-embedded\python.exe"
     set "PYTHON_LOCATION=python-embedded\"
+    goto :found_python
 )
 
 if exist "%APP_DIR%python-portable\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python-portable\python.exe"
     set "PYTHON_LOCATION=python-portable\"
+    goto :found_python
 )
+
+:found_python
 
 REM Check if we found portable Python
 if "%PYTHON_EXE%"=="" (

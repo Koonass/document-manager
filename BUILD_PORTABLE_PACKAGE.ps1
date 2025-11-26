@@ -17,8 +17,9 @@ Write-Host ""
 $arch = if ([Environment]::Is64BitOperatingSystem) { "amd64" } else { "win32" }
 Write-Host "[INFO] Detected architecture: $arch" -ForegroundColor Green
 
+# NOTE: Using standard installer instead of embedded because embedded lacks tkinter
 # URLs
-$pythonUrl = "https://www.python.org/ftp/python/$PythonVersion/python-$PythonVersion-embed-$arch.zip"
+$pythonUrl = "https://www.python.org/ftp/python/$PythonVersion/python-$PythonVersion-$arch.exe"
 $getPipUrl = "https://bootstrap.pypa.io/get-pip.py"
 
 Write-Host ""

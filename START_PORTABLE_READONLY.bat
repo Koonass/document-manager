@@ -109,17 +109,22 @@ set "PYTHON_EXE="
 if exist "%APP_DIR%python\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python\python.exe"
     echo [OK] Found: python\python.exe
+    goto :found_python_readonly
 )
 
 if exist "%APP_DIR%python-embedded\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python-embedded\python.exe"
     echo [OK] Found: python-embedded\python.exe
+    goto :found_python_readonly
 )
 
 if exist "%APP_DIR%python-portable\python.exe" (
     set "PYTHON_EXE=%APP_DIR%python-portable\python.exe"
     echo [OK] Found: python-portable\python.exe
+    goto :found_python_readonly
 )
+
+:found_python_readonly
 
 if "%PYTHON_EXE%"=="" (
     echo [ERROR] Portable Python not found!
